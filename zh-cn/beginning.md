@@ -10,13 +10,13 @@ RPGItems 插件拥有高度的可自定义性，使用它可以创建出各式�
 ![默认物品](../assets/images/beginning-img1.png)
 
 * 使用 `/rpgitem liniper_lifle item stone_hoe` 将物品的外形改为石锄。  注意，此时手中的物品外形也被修改为了石锄。由于 RPGItems 插件的物品更新策略，每当对一件物品进行修改，服务器中的**所有该物品都将同步更新**，这包括玩家背包中、玩家的箱子和末影箱中、其它插件提供的额外背包中等等。 
-* 使用 ``/rpgitem liniper_lifle display `&bLiniper Lifle``` 修改物品的名称为 `Liniper Lifle`
+* 使用 ```/rpgitem liniper_lifle display `&bLiniper Lifle``` 修改物品的名称为 `Liniper Lifle`
 
   
-  在 RPGItems 插件中，所有的显示文本均支持颜色代码 `&`。如果显示文本中需要包含空格，则需要使用反引号 ````` 将文本括起。  
+  在 RPGItems 插件中，所有的显示文本均支持颜色代码 `&`。如果显示文本中需要包含空格，则需要使用反引号 \`\` 将文本括起。  
   注意，在修改名称后，手中物品的名称没有被更新。出于物品可以被例如 NyaaUtils 等插件重命名的考虑，在更新物品时仅有名称不会被更新。重新获得一份该物品后，新物品的名称为修改后的名称。  
 
-* 使用 `/rpgitem liniper_lifle hand &cRifle` 修改名称下一行左方的信息。使用 ``/rpgitem liniper_lifle type `&4Heavy weapon``` 修改名称下一行右方的信息。  这两处信息仅作为显示，没有具体的作用。 
+* 使用 `/rpgitem liniper_lifle hand &cRifle` 修改名称下一行左方的信息。使用 ```/rpgitem liniper_lifle type `&4Heavy weapon``` 修改名称下一行右方的信息。  这两处信息仅作为显示，没有具体的作用。 
 * 最后，使用 `/rpgitem liniper_lifle damage 5 8` 将它的伤害值设置为 5-8 点。
 
 ![修改名称、描述和伤害](../assets/images/beginning-img2.png)
