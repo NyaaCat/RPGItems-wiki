@@ -4,7 +4,7 @@ RPGItems 插件拥有非常完善的命令补全，大部分情况下，使用�
   
 在没有特殊说明的情况下，本帮助文档中，方括号 `[ ]` 中的参数为必须参数，尖括号 `< >` 的参数为可选参数。
 
-RPGItems 中所有文本均支持颜色代码 `&`。如果文本中需要包含空格，请使用反引号 ````` 将文本括起。
+RPGItems 中所有文本均支持颜色代码 `&`。如果文本中需要包含空格，请使用反引号 `` ` `` 将文本括起。
 
 对于所有与物品相关的命令，例如 `/rpgitem [item] display <text>` 指令，其第二字段（`[item]`）与第三字段（`display`）的内容可以互换。以下不再作详细说明。
 
@@ -62,7 +62,7 @@ RPGItems 中所有文本均支持颜色代码 `&`。如果文本中需要包含�
   * `NUMERIC_BIN` 二进制数字指示；
   * `NUMERIC_BIN_MINUS_ONE` 二进制数字减去 1 。 
 * `/rpgitem description [item] add [text]`  在 `[item]` 的最下方添加一行 `[text]` 描述。 
-* `/rpgitem description [item] remove [index]`  移除 `[item]` 的第 `[index]` 行描述，并将之后的描述依次前移一行。`[index]` 从 0 开始计数。 如果需要使第 `[index]` 行显示为空行，可以设置该行描述为 ```````` 。 
+* `/rpgitem description [item] remove [index]`  移除 `[item]` 的第 `[index]` 行描述，并将之后的描述依次前移一行。`[index]` 从 0 开始计数。 如果需要使第 `[index]` 行显示为空行，可以设置该行描述为 `` ` ` `` 。 
 * `/rpgitem description [item] set [index] [text]`  修改 `[item]` 第 `[index]` 行的描述为 `[text]` 。 
 * `/rpgitem description [item] insert [index] [text]`  在 `[item]` 第 `[index]` 行前插入一行描述 `[text]` 。
 

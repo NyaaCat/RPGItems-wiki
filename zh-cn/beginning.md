@@ -51,7 +51,7 @@ RPGItems 插件拥有高度的可自定义性，使用它可以创建出各式�
 RPGItems 支持自由修改物品的描述文本。
 
 * 使用 `/rpgitem liniper_lifle togglepowerlore` 隐藏技能描述文本。
-* 使用 ``/rpgitem liniper_lifle description add `Burst three arrows a time``` 为物品添加一行描述文本。  除此之外，还可以使用 `description set [行数] [内容]` 来修改某一行的内容，`description insert [行数] [内容]` 在某一行前插入内容，`description remove [行数]` 来删除某一行。注意，行数从 0 开始计数。
+* 使用 ``/rpgitem liniper_lifle description add `Burst three arrows a time` `` 为物品添加一行描述文本。  除此之外，还可以使用 `description set [行数] [内容]` 来修改某一行的内容，`description insert [行数] [内容]` 在某一行前插入内容，`description remove [行数]` 来删除某一行。注意，行数从 0 开始计数。
 
 ## 添加耐久值
 
