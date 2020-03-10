@@ -7,3 +7,4 @@
 - [Conditions](condition.md)
 - [Powers](power.md)
 - [Modifier](modifier.md)
+- [FAQ](faq.md)
