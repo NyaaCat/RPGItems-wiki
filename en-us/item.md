@@ -6,7 +6,7 @@
 /rpgitem display mysword `&aHero Sword`
 ```
 
-* You can use `\`` to quote a name containing spaces.
+* You can use \`\` to quote a name containing spaces.
 * You can use `&` symbol to indicate a formatting code.
 
 ## Item model
