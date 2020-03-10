@@ -75,7 +75,7 @@ Deals damage to a range of targets.
 
 ## Airborne
 
-TBD
+Damage boost when flying.
 
 ## Arrow
 
@@ -101,6 +101,47 @@ Pull or push entity.
 ## Beam
 
 Fire a beam made by particle. This is by far the most complex and powerful power in RPGItems.
+
+- `length` Maximum beam length
+- `ttl` Time to live ticks
+- `particle` Particle type, see https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Particle.html
+- `mode` Can be `BEAM` (run in 1 tick) or `PROJECTILE` (run in multiple ticks)
+- `pierce` Number of targets that can be pierced through
+- `ignoreWall` Ignore wall when flying, defaults to `true`
+- `damage` Damage deal when contact, this is independent with damage property in item config
+- `speed` Beam flying speed, block per second
+- `offsetX` particle offsetX
+- `offsetY` particle offsetY
+- `offsetZ` particle offsetZ
+- `particleSpeed` particle speed parameter
+- `particleDensity` how many particle spawn dots in one block space
+- `cone` Angle from your direction to fire discrete beams
+- `homing` Radius for homing
+- `homingAngle` Angle from your direction to select target
+- `homingRange` Block distance to select target
+- `homingMode` Can be
+  - `ONE_TARGET` Lock on single target
+  - `MULTI_TARGET` Change target after last hit
+  - `MOUSE_TRACK` Lock on nearest target of mouse aim
+- `homingTarget` Can be `MOBS` / `ENTITY` / `PLAYER`
+- `ticksBeforeHoming` Ticks before homing path
+- `beamAmount` How many beam will be fired in a single run
+- `burstCount` How many beam will be fired in a single trigger
+- `burstInterval` Ticks between next burst
+- `bounce` How many times the beam will bounce off wall, require `ignoreWall` to `false`
+- `hitSelfWhenBounced` Beam may hit yourself when bounce off wall
+- `gravity` Gravity of beam, can be negative (trace goes up)
+- `extraData` Color of `REDSTONE` particle, in format of `r,g,b,size`. E.g., extraData:\`51,204,255,0.35\` for a cyan slim beam
+- `speedBias` Expression to control the flying speed. E.g., `4+x*10*t`
+- `behavior` Controls the beam behavior
+- `initialRotation`
+- `firingLocation` Can be `SELF` or `TARGET`
+- `effectOnly` Only act as effect, will not trigger HIT event
+- `firingR` Polar coordinates parameter
+- `firingTheta` Polar coordinates parameter
+- `firingPhi` Polar coordinates parameter
+- `firingRange`
+- `castOff`
 
 ## CancelBowArrow
 
@@ -302,6 +343,35 @@ Applies potion effect when holding or wearing.
 
 Fires projectile with many options.
 
+- `isCone` if the projectile fires in a cone. Defaults to `false`
+- `gravity` if the projectile affected by gravity. Defaults to `true`
+- `range` cone angle from your direction
+- `amount` amount of projectile in a single run
+- `speed` projectile flying speed
+- `burstCount` how many projectiles will be fired
+- `burstInterval` ticks between next burst run
+- `setFireballDirection` fireball will not float if set to `true`
+- `yield` may cause explosion, defaults to `false`
+- `isIncendiary` may cause fire, defaults to `false`
+- `projectileType` type of projectile, can be
+  - `arrow`
+  - `snowball`
+  - `fireball`
+  - `smallfireball`
+  - `llamaspit`
+  - `shulkerbullet`
+  - `dragonfireball`
+  - `trident`
+  - `skull`
+- `suppressArrow` Cancels arrow when firing from bow, but arrow will still be consumed
+- `applyForce` apply bow force for arrow and fireball, affects speed
+- `firingLocation` Can be `SELF` or `TARGET`
+- `firingR` Polar coordinates parameter
+- `firingTheta` Polar coordinates parameter
+- `firingPhi` Polar coordinates parameter
+- `firingRange`
+- `castOff`
+
 ## Pumpkin
 
 Force target wear a pumpkin head.
@@ -317,6 +387,18 @@ Deals real damage, ignores armor.
 ## Repair
 
 Consume material to restore (or cost) durability.
+
+- `durability` Durability restored (or cost) per each repair material
+- `display` Message displayed in lore
+- `material` Repair material. Can be `HAND` to use item hold in mainhand.
+- `isSneak` Require sneak to trigger
+- `mode` Can be `DEFAULT`, `ALLOW_OVER` and `ALWAYS`
+- `allowBreak` defaults to `true`
+- `abortOnSuccess` abort and break execution after successfully triggered (repaired)
+- `abortOnFailure` abort and break execution after failed to repair (e.g., no material)
+- `customMessage` Message to display in chat
+- `amount` Maximum material amount to consume in each trigger
+- `showFailMsg` Show repair failed message or not. Default to `true`
 
 ## Rescue
 
