@@ -1,6 +1,7 @@
 - [Home](README.md)
 - [Installation](installation.md)
 - [Basic Commands](basic.md)
+- [Item Customization](item.md)
 - [Markers](marker.md)
 - [Triggers](trigger.md)
 - [Conditions](condition.md)
