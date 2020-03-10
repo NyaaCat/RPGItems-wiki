@@ -1,0 +1,52 @@
+# Trigger
+
+Trigger is used to activate powers on an item.
+
+Available triggers
+
+## ATTACHMENT
+
+## BEAM_HIT_ENTITY
+
+## BEAM_HIT_BLOCK
+
+## BOW_SHOOT
+
+## HIT
+
+## HIT_GLOBAL
+
+## HIT_TAKEN
+
+## HURT
+
+## LEFT_CLICK
+
+## LIVING_ENTITY
+
+## LOCATION
+
+## OFFHAND_CLICK
+
+## PICKUP_OFFHAND
+
+## PROJECTILE_HIT
+
+## PROJECTILE_LAUNCH
+
+## RIGHT_CLICK
+
+## SNEAK
+
+## SNEAKING
+
+## SPRINT
+
+## SWAP_TO_MAINHAND
+
+## SWAP_TO_OFFHAND
+
+## TICK
+
+## TICK_OFFHAND
+
