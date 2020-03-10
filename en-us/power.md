@@ -4,17 +4,22 @@ Power is the core feature set that actually implementing an item function.
 
 Powers execute in pitfall order, and only correctly triggered powers will be executed.
 
+There are some general power properties:
+
+- `cooldown` Cooldown ticks before next use
+- `cost` Cost to durability for each use
+- `condition` Conditions to meet in order to trigger this power
+- `trigger` Triggers of this power
+
 ## AOE
 
 Applies effect to targets in an area.
 
-- `cooldown` Cooldown in ticks
 - `amplifier` Effect amplifier
 - `duration` Effect duration
 - `range` Radius of area
 - `selfapplication` Whether the effect applies to yourself
 - `name` Effect name, see https://hub.spigotmc.org/javadocs/spigot/org/bukkit/potion/PotionEffectType.html
-- `cost` Cost to durability for each use
 
 ## AOECommand
 
@@ -34,118 +39,315 @@ Let all targets within a range to execute command.
 
 ## AOEDamage
 
+Deals damage to a range of targets.
+
+- `range` Maximum target selection range
+- `minrange` Minimum target selection range
+- `angle` Angle from your direction, value from 0 to 180
+- `count` Number of targets can be attacked
+- `incluePlayers` (typo) include players when triggering power
+- `selfapplication` Apply to yourself when triggering power
+- `mustsee` There must be no block between you and target
+- `damage` Damage amount to deal, this is independent with item damage property
+- `delay` Delay ticks before actual apply damage
+- `selectAfterDelay` When delay is not 0, set this to false to select target on use, so that target will be damaged even it's out of range.
+- `firingRange`
+- `firingLocation` Define location of AOE center, can be `SELF` or `TARGET`
+- `castOff` When `firingLocation` is `TARGET` and delay is not 0, set this to true to set center on use before delay
+
 ## Airborne
+
+TBD
 
 ## Arrow
 
+Deprecated. Use `Projectile`.
+
 ## Attachment
+
+Trigger power from other items.
 
 ## Attract
 
+Pull or push entity.
+
+- `radius` Radius to select target
+- `maxSpeed` Maximum speed to pull/push entity
+- `duration` Duration time to pull/push entity
+- `attractingTickCost` Cost per tick for using this power
+- `attractingEntityTickCost` Cost per tick per entity for using this power
+- `attractPlayer` Whether it will pull/push player
+- `firingLocation` Can be `SELF` or `TARGET`
+- `firingRange`
+
 ## Beam
+
+Fire a beam made by particle. This is by far the most complex and powerful power in RPGItems.
 
 ## CancelBowArrow
 
+Cancels bow arrow. Arrow will not be consumed and no arrow is fired. Often used on bows with other powers.
+
 ## Charge
+
+Damage boost when sprinting.
+
+- `percentage` Damage increase percentage
+- `speedPercentage` Damage increase percentage by speed
+- `setBaseDamage` Set to true to use dynamic damage as base, otherwise use damage property in item config
+- `cap` Maximum damage cap
 
 ## Command
 
+Execute command on use.
+
+- `command` Command to execute. Use \` to quote with space, e.g., `command:\`minecraft:give {player} stone\``
+- `display` Message to display in lore
+- `permission` Permission to assign just for executing the command
+
+Variables available in command:
+
+- `{player}` the user's name
+- `{player.x}` the user's X coordinate
+- `{player.y}` the user's Y coordinate
+- `{player.z}` the user's Z coordinate
+- `{player.yaw}` the user's yaw coordinate
+- `{player.pitch}` the user's pitch
+
 ## CommandHit
+
+Execute command on hit.
+
+- `command` Command to execute.
+- `permission` Permission to assign just for executing the command
+- `minDamage` Minimum damage to deal in order to trigger this power
+
+Variables available in command:
+
+- `{entity}` the target's name
+- `{entity.uuid}` the target's UUID
+- `{entity.x}` the target's X coordinate
+- `{entity.y}` the target's Y coordinate
+- `{entity.z}` the target's Z coordinate
+- `{entity.yaw}` the target's yaw coordinate
+- `{entity.pitch}` the target's pitch
 
 ## Consume
 
+Consume item on use.
+
 ## ConsumeHit
+
+Consume item on hit.
 
 ## CriticalHit
 
+Deals critical hit.
+
+- `chance` Chance to trigger the power
+- `backstabchance` Chance to backstab
+- `factor` Damage multiplier
+- `backstabFactor` Damage multiplier when backstab
+- `setBaseDamage` Set to true to use dynamic damage as base, otherwise use damage property in item config
+
 ## DeathCommand
+
+A chance to kill target and execute command.
 
 ## Deflect
 
+Deflect incoming projectile.
+
 ## DelayedCommand
+
+Execute command with delay.
 
 ## Dummy
 
+Dummy power, not doing anything but can use to fine tune cooldown, cost logic and others.
+
+- `checkDurabilityBound` Check durability bound before trigger. Once durability out of bound the dummy will not be triggered.
+- `costByEnchantment`
+- `doEnchReduceCost` Enchantment like durability can reduce cost (chance not to cost)
+- `enchCostPercentage` Percentage not to cost for each enchantment level
+- `enchantmentType` Enchantment name like `minecraft:unbreaking`
+- `costbyDamage` Cost value by damage
+- `cooldownKey` When there are multiple dummy power, set a unique key to make cooldowns independent
+- `successResult` Action after this dummy is successfully executed, defaults to `OK` which will continue with next power.
+- `costResult` Action after cost. Defaults to `COST` which deals the cost and continue with next power. Set to `ABORT` to break and abort the whole process, `OK` to ignore the cost and continue with next power.
+- `cooldownResult` Action after cooldown. Defaults to `COOLDOWN` which break execution of dummy but continue with next power. Set `ABORT` to break and abort the whole process, `OK` to ignore cooldown and continue with next power.
+- `showCDwarning` If you wish not to show cooldown warning message, set to `false`.
+- `globalCooldown` Set the cooldown to global.
+
 ## Economy
+
+Operates economy functions.
 
 ## EnchantedHit
 
+Make enchantment boost damage.
+
+- `mode` Can be `ADDITION` or `MULTIPLICATION`
+- `amountPerLevel` Boost percentage per enchant level, 1 = 100%
+- `enchantmentType` See https://hub.spigotmc.org/javadocs/spigot/org/bukkit/enchantments/Enchantment.html
+- `setBaseDamage` Set to true to use dynamic damage as base, otherwise use damage property in item config
+
 ## EvalDamage
+
+Set damage based on expression.
 
 ## Explosion
 
+Cause explosion on use.
+
 ## Fire
+
+Ignite target.
 
 ## Fireball
 
+Deprecated. Use `Projectile`.
+
 ## Flame
+
+Shoots a bunch of fire.
 
 ## Food
 
+Restores saturation level.
+
 ## ForceField
+
+Summon a forcefield to trap or block target.
 
 ## Glove
 
+Catch and throw entity.
+
 ## Gunfu
+
+Projectiles will homing to target.
 
 ## Headshot
 
+Damage boost when hit target head.
+
 ## Ice
+
+Shoots ice and form an ice block.
 
 ## Knockup
 
+Knockup target on hit.
+
 ## Lifesteal
+
+Gain health on hit. 
 
 ## Lightning
 
+Summon lightning strike.
+
 ## Mount
+
+Ride on entity.
 
 ## NoImmutableTick
 
+Ignore immutable tick.
+
 ## ParticleBarrier
+
+Summon ParticleBarrier to reduce damage taken and give you power.
 
 ## Particle
 
+Plays particle on use or hit.
+
 ## ParticleTick
+
+Plays particle when holding or wearing.
 
 ## PotionHit
 
+Applies potion effect on hit.
+
 ## PotionSelf
+
+Applies potion effect to user.
 
 ## PotionTick
 
+Applies potion effect when holding or wearing.
+
 ## Projectile
+
+Fires projectile with many options.
 
 ## Pumpkin
 
+Force target wear a pumpkin head.
+
 ## Rainbow
+
+Shoots colorful wool.
 
 ## RealDamage
 
+Deals real damage, ignores armor.
+
 ## Repair
+
+Consume material to restore (or cost) durability.
 
 ## Rescue
 
+A better totem replacement.
+
 ## Rumble
+
+Summon a wave to blow target to sky.
 
 ## Scoreboard
 
+Operates on scoreboard.
+
 ## Shulkerbullet
+
+Shoots shulkerbullet that homing to target.
 
 ## Skyhook
 
+Hook to specific block.
+
 ## Sound
+
+Plays sound on use or hit.
 
 ## Stuck
 
+Cause targets not to move or teleport.
+
 ## TNTCannon
+
+Shoots TNT.
 
 ## Teleport
 
+Teleport for a distance.
+
 ## Throw
+
+Throw entity.
 
 ## TippedArrow
 
+Deprecated. Use Projectile and PotionHit
+
 ## Torch
 
+Shoots some torches to light up a place.
+
 ## Translocator
+
+Shoots a translocator and swap your position.
