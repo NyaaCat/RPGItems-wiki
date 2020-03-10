@@ -11,6 +11,24 @@ There are some general power properties:
 - `condition` Conditions to meet in order to trigger this power
 - `trigger` Triggers of this power
 
+Command to modify power on an item:
+
+/rpgitem power [operation] [item] [params]
+
+Available operations:
+
+- `add` Add a power
+- `remove` Remove a specific power
+- `list` List all powers
+- `prop` List details about a specific power, or modify it with additional parameters
+- `reorder` Re-order a specific power to a new position. This may affect power execution logic
+
+E.g.,
+
+```
+/rpgitem power add mysword rpgitems:beam cost:1 damage:10 ttl:20 triggers:LEFT_CLICK speed:16 particle:CRIT_MAGIC length:24
+```
+
 ## AOE
 
 Applies effect to targets in an area.
