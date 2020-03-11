@@ -2,9 +2,9 @@
 
 Conditions determine whether a power can be activated or not based on many different variables.
 
-Conditions have ID, can be invoked in powers, triggers and condition themselves.
+Conditions have ID, to be invoked in powers, triggers and condition themselves.
 
-Multiple condition IDs is also acceptable, and treated as AND operation (all conditions must be met).
+Multiple condition IDs are also acceptable, and treated as AND operation (all conditions must be met).
 
 Basic command to modify conditions on an item:
 
