@@ -42,6 +42,8 @@ Return true when one of the conditions is met.
 
 Return true when an odd number of conditions are met.
 
+* Note: You need to set `isStatic` to `false`.
+
 ## SlotCondition
 
 Return true when the item is in correct inventory slot.
