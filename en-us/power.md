@@ -238,6 +238,8 @@ Power dummy do nothing but provides a bunch of universal options to help you mak
 - `showCDwarning` If you wish not to show cooldown warning message, set to `false`.
 - `globalCooldown` Set the cooldown to global.
 
+**Use PowerDummy to disbale cooldown message, unify and control cooldown / cost.**
+
 You should already acknowledge that RPGitems execute powers based on trigger, like `RIGHT_CLICK` or `LEFT_CLICK` and activate power one by one in a pitfall. So if you have an item with a list of powers like:
 
 1. PowerProjectile, trigger `LEFT_CLICK`
