@@ -223,7 +223,7 @@ Execute command with delay.
 
 ## Dummy
 
-Dummy power, not doing anything but can use to fine tune cooldown, cost logic and others.
+Power dummy do nothing but provides a bunch of universal options to help you make item logic execution clean.
 
 - `checkDurabilityBound` Check durability bound before trigger. Once durability out of bound the dummy will not be triggered.
 - `costByEnchantment`
@@ -231,12 +231,27 @@ Dummy power, not doing anything but can use to fine tune cooldown, cost logic an
 - `enchCostPercentage` Percentage not to cost for each enchantment level
 - `enchantmentType` Enchantment name like `minecraft:unbreaking`
 - `costbyDamage` Cost value by damage
-- `cooldownKey` When there are multiple dummy power, set a unique key to make cooldowns independent
+- `cooldownKey` When there are multiple dummy power, set a unique key string to make cooldowns independent
 - `successResult` Action after this dummy is successfully executed, defaults to `OK` which will continue with next power.
 - `costResult` Action after cost. Defaults to `COST` which deals the cost and continue with next power. Set to `ABORT` to break and abort the whole process, `OK` to ignore the cost and continue with next power.
 - `cooldownResult` Action after cooldown. Defaults to `COOLDOWN` which break execution of dummy but continue with next power. Set `ABORT` to break and abort the whole process, `OK` to ignore cooldown and continue with next power.
 - `showCDwarning` If you wish not to show cooldown warning message, set to `false`.
 - `globalCooldown` Set the cooldown to global.
+
+You should already acknowledge that RPGitems execute powers based on trigger, like `RIGHT_CLICK` or `LEFT_CLICK` and activate power one by one in a pitfall. So if you have an item with a list of powers like:
+
+1. PowerProjectile, trigger `LEFT_CLICK`
+2. PowerBeam, trigger `RIGHT_CLICK`
+3. PowerSound, trigger `RIGHT_CLICK`
+4. PowerParticle, trigger `LEFT_CLICK`
+
+When you do left click, only 1 and 4 will be activated. The item firstly shoot a projectile and then play a particle, but in a single tick.
+
+Now if you want to cost 1 durability on each left click use, with 20 ticks cooldown and do not wish to show the duplicated cooldown message, you can add PowerDummy at first place, and set `cooldown:20 cooldownKey:left cooldownResult:ABORT cost:1 showCDWarning:false triggers:LEFT_CLICK`. RPGitem will first check PowerDummy, and if it's in cooldown then abort the whole execution process, which means projectile and particle powers will not be activated. If it's not cooling down and all conditions (if any) are met, cost 1 then continue with power execution (fire a projectile and play particle).
+
+Similarly, if you set `costResult` to `ABORT`, when the item durability less than its lower bound, the power execution will be aborted.
+
+Please note dummy power options is effective only with correct trigger. If you set dummy with `RIGHT_CLICK` trigger, it will not affect any power with triggers other than `RIGHT_CLICK`.
 
 ## Economy
 
