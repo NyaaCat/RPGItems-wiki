@@ -48,6 +48,26 @@ Return true when an odd number of conditions are met.
 
 Return true when the item is in correct inventory slot.
 
+Available slot options:
+
+- `ARMOR`
+- `HAND`
+- `BACKPACK`
+- `BELT`
+- `INVENTORY`
+- `HELMET`
+- `CHESTPLATE`
+- `LEGGINGS`
+- `BOOTS`
+- `MAIN_HAND`
+- `OFF_HAND`
+
+Example:
+
+```
+/rpgitem condition add myhelmet rpgitems:slotcondition id:wear critical:true slots:HELMET
+```
+
 ## ChanceCondition
 
 Return true in the chance of N percent.
