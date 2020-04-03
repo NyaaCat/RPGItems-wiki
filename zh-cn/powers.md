@@ -4,7 +4,7 @@
 
 技能是按照顺序执行的，并且只在有对应触发时才会执行。
 
-以下是各个技能的通用参数:
+以下是部分技能的通用参数:
 
 - `cooldown` 在下次可以使用前的冷却时间（单位：Ticks）。
 - `cost` 每次使用时消耗的耐久值。
@@ -14,6 +14,7 @@
 - `requiredContext` 限制技能执行的一个值。
 - `requireHurtByEntity` 当触发设置为`HURT`或`HIT_TAKEN`时，将此值设置为`true`可以使仅来自于生物的有源伤害能够触发技能（不包括中毒、凋零、火焰、摔落伤害等）。默认为`true` 
 - `selectors` 技能选择器，使技能仅对部分实体生效。如需为技能指定选择器，首先使用`selector`技能定义一个选择器，并将该技能的 selectors 参数设置为 selector 技能中定义的 id 。
+- `setBaseDamage` 设置为 true 时，后续的伤害加成技能将基于此伤害值计算，武器的最终伤害取叠加值。 设置为 false 时，后续的伤害加成技能将基于原伤害值计算，武器的最终伤害取最高值。 默认为 false。
 
 
 以下是用来修改一个道具技能的命令:
@@ -49,9 +50,9 @@
 对范围内的目标执行命令
 
 - `type` 目标种类，可以是：
-  - `entity`
-  - `player`
-  - `mobs`
+  - `entity` 实体
+  - `player` 玩家
+  - `mobs` 怪物
 - `r` 目标范围
 - `rm` 最小范围
 - `facing` 角度范围，可以由0至180度
@@ -74,7 +75,7 @@
 - `damage` 造成的伤害量，独立于于道具属性的伤害
 - `delay` 造成伤害前的延时（单位：Ticks）
 - `selectAfterDelay` 当延时（delay）不为0时，将此参数设置为false可以使得目标脱离范围时仍然受到伤害
-- `firingRange`
+- `firingRange` 
 - `firingLocation` 确定技能生效位置, 可以是自身`SELF`或是目标`TARGET`
 - `castOff` 当技能生效位置`firingLocation`是目标`TARGET`且延时（delay）不为0时,设置此参数为`true`可以在延时前设定范围中心
 
@@ -82,13 +83,20 @@
 
 在飞行时增加伤害
 
+- `cap` 可造成伤害的最大值
+- `percentage` 飞行时造成伤害的增加百分比量
+
 ## 箭矢（Arrow）
 
-发射箭矢，不推荐使用。请使用弹射物`Projectile`。
+发射箭矢，不推荐使用。请使用弹射物 `Projectile` 。
 
 ## 配件（Attachment）
 
 用于触发其他道具的ATTACHMENT触发。
+
+- `allowInvSlots` 可用的背包格位置，设置为-1为禁用
+- `allowItems` 可用的RPGItem
+- `limit` 配件数量
 
 ## 吸引（Attract）
 
@@ -152,6 +160,8 @@
 
 取消弓的箭矢，不会造成任何箭矢的消耗也不会发射任何箭矢。常用于使用了其他技能的弓道具。
 
+- `cancelArrow` 是否取消箭矢发射
+
 ## 勇气绝杀（Charge）
 
 奔跑时增加伤害。
@@ -166,7 +176,7 @@
 使用时执行命令。
 
 - `command` 执行的命令. 当命令中包含空格时请使用\`符号。示例：command:\`minecraft:give {player} stone\`
-- `display` 在lore中显示的展示名
+- `display` 在道具描述中显示的展示名
 - `permission` 执行命令所需要的命令节点
 
 可在命令中使用的变量：
@@ -182,7 +192,7 @@
 
 在击中时执行命令。
 
-- `command` 执行的命令。
+- `command` 执行的命令
 - `permission` 执行命令需要的命令节点
 - `minDamage` 触发技能所需要的最低伤害
 
@@ -212,19 +222,36 @@
 - `backstabchance` 背刺概率，N%
 - `factor` 暴击伤害倍率
 - `backstabFactor` 背刺伤害倍率
-- `setBaseDamage` 是否将动态伤害设为基础伤害（伤害增益可叠加）, 不然将会使用道具属性中的伤害量
 
-## 死亡命令（DeathCommand）
+## 即死命令（DeathCommand）
 
-在击杀目标时几率性执行指令。
+以一定概率即死目标并执行命令。
+
+- `chance` 执行概率，1/N
+- `command` 执行的命令
+- `des` 技能提示的文字
+- `permission` 执行命令所需要的命令节点
+- `count`
 
 ## 弹反（Deflect）
 
 将飞来的弹射物弹反回去。
 
+- `chance` 被动弹反的百分比概率
+- `cooldownPassive` 被动弹反的冷却时间，单位Ticks
+- `duration` 弹反持续时间，单位Ticks
+- `facing` 最大有效角度，从0至180度
+- `deflectCost` 每次弹反的耐久消耗
+
 ## 延时命令（DelayedCommand）
 
 在延时后执行命令。
+
+- `delay` 延时时间，单位Ticks
+- `display` 显示在道具描述中的展示名
+- `command` 执行的命令
+- `permission` 执行命令需要的命令节点
+- `cmdInPlace` 
 
 ## 空（Dummy）
 
@@ -266,6 +293,10 @@
 
 消耗或给予使用者金钱。
 
+- `abortOnFailure` 是否在触发失败时中止
+- `amountToPlayer` 消耗或给予使用者的金额，负数为消耗，正数为给予
+- `showFailMassege` 是否显示失败信息
+
 ## 附魔攻击（EnchantedHit）
 
 让附魔来增强伤害量。
@@ -273,19 +304,27 @@
 - `mode` 可以是增加量`ADDITION`或是倍率增加`MULTIPLICATION`
 - `amountPerLevel` 每一附魔等级增加百分比，1 = 100%
 - `enchantmentType` 详见：https://hub.spigotmc.org/javadocs/spigot/org/bukkit/enchantments/Enchantment.html
-- `setBaseDamage` 设置为 true 时，后续的伤害加成技能将基于此伤害值计算，武器的最终伤害取叠加值。 设置为 false 时，后续的伤害加成技能将基于原伤害值计算，武器的最终伤害取最高值。 默认为 false
 
 ## 动态伤害（EvalDamage）
 
-使用表达式来计算基础伤害。
+使用表达式来计算伤害。
+
+- `expression` 用于计算伤害的表达式
 
 ## 爆炸（Explosion）
 
 在使用区产生一个爆炸。
 
+- `chance` 发生爆炸的百分比几率
+- `distance` 发生爆炸的最远距离
+- `explosionPower` 爆炸强度
+
 ## 火焰（Fire）
 
 发射火焰来点燃目标。
+
+- `burnduration` 燃烧持续时间
+- `distance` 可点燃的最远距离
 
 ## 火焰弹（Fireball）
 
@@ -295,25 +334,52 @@
 
 点燃被击中的目标。
 
+- `burntime` 点燃持续时间
+
 ## 食物（Food）
 
-回复饥饿值。
+回复饥饿值。（此技能使用会必然消耗一个道具）
+
+- `foodpoint` 回复的饥饿值量
 
 ## 力场护盾（ForceField）
 
 生成一个护盾来保护自己。
 
+- `base` 护盾的地基，必填
+- `cooldown` 护盾的冷却时间，必填
+- `height` 护盾的高度，必填
+- `radius` 护盾的半径，必填
+- `ttl` 护盾持续时间
+
 ## 鬼手（Glove）
 
 抓住实体并将它扔出去。
+
+- `maxDistance` 最大抓取距离
+- `maxTicks` 最大抓取时间
+- `throwSpeed` 抓取结束后的投掷速度
 
 ## 枪斗术（Gunfu）
 
 使弹射物追踪目标。
 
+- `delay` 索敌延时
+- `distance` 最大索敌距离
+- `forceFactor` 力度倍率
+- `initVelFactor` 初速度倍率
+- `maxTicks` 最大追踪时间
+- `VelFactor` 每Tick速度改变倍率
+- `viewAngle` 最大索敌角度
+
 ## 爆头（Headshot）
 
-击中目标头部造成额外伤害。
+弹射物击中目标头部造成额外伤害。
+
+- `factor` 伤害倍率
+- `soundEnemy` 是否播放被爆头粒子音效
+- `soundSelf` 是否播放爆头粒子音效
+- `particle` 是否显示爆头粒子
 
 ## 冰冻（Ice）
 
@@ -323,45 +389,98 @@
 
 将目标击飞。
 
+- `chance` 击飞概率，1/N
+- `knockUpPower` 击飞力度
+
 ## 生命窃取（Lifesteal）
 
-在击中时回复自身生命值。
+根据击中伤害吸取生命值
+
+- `chance` 吸取百分比几率
+- `factor` 吸取倍率
 
 ## 唤雷（Lightning）
 
 生成闪电造成雷击。
 
+- `chance` 雷击概率，1/N
+
 ## 乘骑（Mount）
 
-可以骑在实体上。
+可以骑在生物上。
+
+- `maxDistance` 生物最远距离
+- `maxTicks` 最大乘骑时间
 
 ## 取消无敌时间（NoImmutableTick）
 
 无视无敌时间。
 
+- `immuTime` 无敌时间，单位Ticks
+
 ## 粒子屏障（ParticleBarrier）
 
 将受到的攻击转化为粒子效果。
+
+- `barrierHealth` 屏障生命值
+- `effect` 屏障效果
+- `energyDecay` 能量每秒的衰减
+- `energyPerBarrier` 屏障能提供的能量
+- `energyPerLevel` 每级力量效果所需要的能量
+- `projected` 是否为投射屏障
 
 ## 粒子效果（Particle）
 
 在使用或击中时生成粒子。
 
+- `delay` 延时时间
+- `dustColor` 尘埃粒子颜色
+- `dustSize` 尘埃粒子大小
+- `effect` 粒子效果
+- `extra` REDSTONE粒子颜色参数
+- `material` FALLING_DUST粒子颜色对应的原物品
+- `playLocation` 生成位置
+  - `HIT_LOCATION` 击中位置
+  - `SELF` 自身
+  - `TARGET` 目标
+- `force` 是否设置粒子为随时可见
+- `particle` 粒子类型
+- `particleCount` 粒子数量
+- `offsetX` 粒子生成X轴偏移
+- `offsetY` 粒子生成Y轴偏移
+- `offsetZ` 粒子生成Z轴偏移
+
 ## 佩戴粒子效果（ParticleTick）
 
 在持有或穿戴时生成粒子。
+
+见**粒子效果（Particle）**
 
 ## 效果命中（PotionHit）
 
 在击中时赋予状态效果。
 
+- `amplifier` 效果倍率
+- `duration` 效果持续时间，单位Ticks
+- `chance` 效果发生概率，1/N
+- `type` 效果类型
+
 ## 自身状态效果（PotionSelf）
 
 赋予使用者状态效果。
 
+- `clear` 是否清除所有效果
+
+其他参数见**效果命中（PotionHit）**
+
 ## 佩戴状态效果（PotionTick）
 
 在持有或穿戴时赋予状态效果。
+
+- `interval` 生效间隔时间，单位Tick
+- `effect` 效果类型
+
+其他参数见**效果命中（PotionHit）
 
 ## 弹射物（Projectile）
 
@@ -396,17 +515,26 @@
 - `firingRange`
 - `castOff`
 
-## 蓝瓜头（Pumpkin）
+## 南瓜头（Pumpkin）
 
 攻击僵尸或者骷髅时给他们戴上南瓜头。
+
+- `chance` 触发几率，百分比
+- `drop` 南瓜头掉落几率
 
 ## 彩虹（Rainbow）
 
 发射各种颜色的羊毛。
 
+- `count` 发射数量
+- `isFire` 是否发射火焰
+
 ## 真实伤害（RealDamage）
 
 造成无视护甲的真实伤害。
+
+- `minDamage` 触发的最低伤害
+- `realDamage` 造成的真实伤害
 
 ## 修理（Repair）
 
@@ -428,9 +556,18 @@
 
 受到过量伤害或者血量即将低于指定值时拯救玩家，比不死图腾更好！
 
+- `damageTrigger` 伤害量触发值
+- `healthTrigger` 生命触发值
+- `inPlace` 是否原地拯救
+- `useBed` 是否回到床上
+
 ## 裂地冲击（Rumble）
 
 在地面上生成一个冲击波将目标击飞。
+
+- `power` 击飞力度
+- `distance` 冲击波最大距离
+- `damage` 冲击波伤害
 
 ## 计分板（Scoreboard）
 
@@ -440,17 +577,39 @@
 
 发射追踪目标的潜影弹。
 
+- `range` 追踪范围
+
 ## 钩爪（Skyhook）
 
 发射钩爪用于钩住指定方块。
+
+- `railMaterial` 允许被钩住的材质，必填
+- `hookDistance` 钩爪距离
+- `hookingTickCost` 钩住时每Tick耐久消耗
 
 ## 声音（Sound）
 
 在使用或击中实体时播放声音。
 
+- `delay` 延时时间，单位Ticks
+- `pitch` 音高
+- `playLocation` 播放中心
+  - `HIT_LOCATION` 击中位置
+  - `SELF` 自身
+  - `TARGET` 目标
+- `sound` 声音类型
+- `volume` 音量
+
 ## 定身（Stuck）
 
 使目标无法移动或是传送。
+
+- `chance` 定身概率，1/N
+- `costAOE` 范围定身耐久消耗
+- `costPerEntity` 每一个实体的耐久消耗
+- `duration` 持续时间
+- `facing` 角度范围
+- `range` 距离范围
 
 ## TNT大炮（TNTCannon）
 
@@ -460,9 +619,24 @@
 
 传送一段距离。
 
+- `distance` 传送距离
+- `targetMode` 寻找传送点的模式
+  - `DEFAULT`
+  - `RAY_TRACING`
+  - `RAY_TRACING_EXACT`
+  - `RAY_TRACING_EXACT_SWEEP`
+  - `RAY_TRACING_SWEEP`
+
 ## 投掷（Throw）
 
 投掷实体。
+
+- `entityName` 实体名，必填
+- `speed` 投掷速度，必填
+- `display` 技能在道具描述中的展示名，必填
+- `cooldown` 冷却时间，必填
+- `entityData` 实体数据
+- `isPersistent` 实体是否写入世界存档
 
 ## 药箭（TippedArrow）
 
@@ -475,3 +649,8 @@
 ## 传送信标（Translocator）
 
 投掷一个传送信标并传送到信标所在地。
+
+- `speed` 
+- `setupCost` 设立信标的耐久消耗
+- `tpCost` 传送耐久消耗
+
