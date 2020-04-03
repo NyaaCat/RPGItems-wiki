@@ -1,7 +1,7 @@
 - [主页](README.md)
 - [安装与配置](installation.md)
 - [基础命令](basic-commands.md)
-- [制作道具](item-customization.md)
+- [制作道具](items-customization.md)
 - [入门教程](beginning.md)
 - [标记列表](markers.md)
 - [触发列表](triggers.md)
