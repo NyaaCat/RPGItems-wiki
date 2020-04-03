@@ -12,7 +12,7 @@ RPGItems 插件拥有高度的可自定义性，使用它可以创建出各式�
 
 - 使用 `rpgitem item gun STONE_HOE` 将道具的材质更换为石锄头。
 
-- 使用 `rpgitem display gun `&d手枪 凛` 将道具的展示名设置为`手枪 凛`（粉色）。
+- 使用 ```rpgitem display gun `&d手枪 凛``` 将道具的展示名设置为 `手枪 凛`（粉色）。
 
 ## 为道具添加技能
 
