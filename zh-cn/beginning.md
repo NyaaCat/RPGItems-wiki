@@ -6,13 +6,13 @@ RPGItems 插件拥有高度的可自定义性，使用它可以创建出各式�
 
 ## 创建一个道具
 
-- 使用 `rpgitem create gun` 来创建一个新的道具，道具的ID为 `gun` 。
+- 使用 `/rpgitem create gun` 来创建一个新的道具，道具的ID为 `gun` 。
 
 ## 调整道具的外观
 
-- 使用 `rpgitem item gun STONE_HOE` 将道具的材质更换为石锄头。
+- 使用 `/rpgitem item gun STONE_HOE` 将道具的材质更换为石锄头。
 
-- 使用 ```rpgitem display gun `&d手枪 凛` ``` 将道具的展示名设置为 `手枪 凛`（粉色）。
+- 使用 ```/rpgitem display gun `&d手枪 凛` ``` 将道具的展示名设置为 `手枪 凛`（粉色）。
   - 在展示名或描述中包含空格时，需要使用反引号`` ` ``将文本括起来
   - 在展示名或描述中需要使用样式代码时，请使用 `&` 符号
 
@@ -41,9 +41,9 @@ RPGItems 插件拥有高度的可自定义性，使用它可以创建出各式�
  
  在完成上述步骤后我们已经拥有了一把点击左键发射箭矢的枪支类武器，但我们发现，在物品描述中会显示技能的信息，这时候我们希望将它进行隐藏并添加我们需要的描述。
  
- - 使用 `rpgitem togglepowerlore gun`来关闭道具的技能描述显示。
+ - 使用 `/rpgitem togglepowerlore gun`来关闭道具的技能描述显示。
  
- - 使用 ```rpgitem description add gun `&7实用的防身武器` ``` 给道具增加一行文本为`实用的防身武器`的描述。
+ - 使用 ```/rpgitem description add gun `&7实用的防身武器` ``` 给道具增加一行文本为`实用的防身武器`的描述。
  
  ## 为道具设置耐久值
  
@@ -51,17 +51,17 @@ RPGItems 插件拥有高度的可自定义性，使用它可以创建出各式�
  
 需要注意的是，RPGItems的道具使用了自己的**独立耐久度系统**，道具的耐久无法通过原版的任何方式来进行修复（例如经验修补附魔，铁砧，砂轮合成，背包合成等）。
 
-- 使用 `rpgitem durability 7` 将道具的最大耐久与默认耐久设置为 7 。
+- 使用 `/rpgitem durability 7` 将道具的最大耐久与默认耐久设置为 7 。
 
-- 使用 `rpgitem durability togglebar` 将道具的耐久度显示在描述中。
+- 使用 `/rpgitem durability togglebar` 将道具的耐久度显示在描述中。
 
-- 使用 `rpgitem durability NUMERIC` 将道具的耐久度显示格式更改为数字模式。
+- 使用 `/rpgitem durability NUMERIC` 将道具的耐久度显示格式更改为数字模式。
 
 ## 为道具设置伤害
 
 至此，我们的道具已经完成了大部分的制作工序，我们还需要为它设置伤害值。
 
-- 使用 `rpgitem damage 10` 将道具的伤害设置为10点。
+- 使用 `/rpgitem damage 10` 将道具的伤害设置为10点。
 
 在完成此步骤后，我们的道具就算是制作完成了，尽管它有些简易，但已经是一把可以正常使用并且能造成一定伤害的枪支类武器。
 
