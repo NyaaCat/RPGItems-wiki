@@ -14,8 +14,8 @@
 - `trigger` 技能的触发。
 - `displayName` 技能的备注信息。
 - `requiredContext` 限制技能执行的一个值。
-- `requireHurtByEntity` 当触发设置为`HURT`或`HIT_TAKEN`时，将此值设置为`true`可以使仅来自于生物的有源伤害能够触发技能（不包括中毒、凋零、火焰、摔落伤害等）。默认为`true` 
-- `selectors` 技能选择器，使技能仅对部分实体生效。如需为技能指定选择器，首先使用`selector`技能定义一个选择器，并将该技能的 selectors 参数设置为 selector 技能中定义的 id 。
+- `requireHurtByEntity` 当触发设置为 `HURT` 或 `HIT_TAKEN` 时，将此值设置为 `true` 可以使仅来自于生物的有源伤害能够触发技能（不包括中毒、凋零、火焰、摔落伤害等）。默认为 `true`  。
+- `selectors` 技能选择器，使技能仅对部分实体生效。如需为技能指定选择器，首先使用 `markers` 标记定义一个选择器，并将技能中的 `selectors` 参数设置为选择器的id。
 - `setBaseDamage` 设置为 true 时，后续的伤害加成技能将基于此伤害值计算，武器的最终伤害取叠加值。 设置为 false 时，后续的伤害加成技能将基于原伤害值计算，武器的最终伤害取最高值。 默认为 false。
 
 
@@ -77,8 +77,8 @@
 - `damage` 造成的伤害量，独立于于道具属性的伤害
 - `delay` 造成伤害前的延时（单位：Ticks）
 - `selectAfterDelay` 当延时（delay）不为0时，将此参数设置为false可以使得目标脱离范围时仍然受到伤害
-- `firingRange` 
-- `firingLocation` 确定技能生效位置, 可以是自身`SELF`或是目标`TARGET`
+- `firingRange` 技能生效中心最远距离
+- `firingLocation` 技能生效中心位置, 可以是自身`SELF`或是光标指向处`TARGET`
 - `castOff` 当技能生效位置`firingLocation`是目标`TARGET`且延时（delay）不为0时,设置此参数为`true`可以在延时前设定范围中心
 
 ## 空中处决（Airborne）
@@ -110,8 +110,8 @@
 - `attractingTickCost` 使用技能时每Tick所消耗的耐久
 - `attractingEntityTickCost` 使用时每个实体每Tick所消耗的耐久
 - `attractPlayer` 是否会吸引玩家
-- `firingLocation` 技能生效位置, 可以是自身`SELF`或是目标`TARGET`
-- `firingRange`
+- `firingLocation` 技能生效中心位置, 可以是自身`SELF`或是光标指向处`TARGET`
+- `firingRange` 技能生效中心最远距离
 
 ## 粒子束（Beam）
 
@@ -150,12 +150,12 @@
 - `speedBias` 使用表达式来控制粒子束速度。示例：`4+x*10*t` 其中x为粒子束已飞行路程，t为飞行时间。
 - `behavior` 控制粒子束行为
 - `initialRotation`
-- `firingLocation` 发射位置，可以是自己`SELF`或是目标`TARGET`
+- `firingLocation` 粒子束发射位置，可以是自己`SELF`或是光标指向位置`TARGET`
+- `firingRange` 粒子束发射位置的最远距离
 - `effectOnly` 仅作为视觉效果，不会触发任何HIT事件
-- `firingR` 极坐标参数
-- `firingTheta` 极坐标参数
-- `firingPhi` 极坐标参数
-- `firingRange`
+- `firingR` 极坐标R参数
+- `firingTheta` 极坐标θ参数
+- `firingPhi` 极坐标ρ参数
 - `castOff`
 
 ## 取消箭矢（CancelBowArrow）
@@ -170,14 +170,13 @@
 
 - `percentage` 伤害增加的百分比量
 - `speedPercentage` 根据速度增加伤害增加的百分比量。
-- `setBaseDamage` 是否将动态伤害设为基础伤害（伤害增益可叠加）, 不然将会使用道具属性中的伤害量
 - `cap` 最大伤害上限
 
 ## 命令（Command）
 
 使用时执行命令。
 
-- `command` 执行的命令. 当命令中包含空格时请使用\`符号。示例：command:\`minecraft:give {player} stone\`
+- `command` 执行的命令. 当命令中包含空格时请使用`` ` ``符号。示例：`` command:\`minecraft:give {player} stone\` ``
 - `display` 在道具描述中显示的展示名
 - `permission` 执行命令所需要的命令节点
 
@@ -233,7 +232,7 @@
 - `command` 执行的命令
 - `des` 技能提示的文字
 - `permission` 执行命令所需要的命令节点
-- `count`
+- `count` 
 
 ## 弹反（Deflect）
 
@@ -260,7 +259,7 @@
 空技能虽然不会做任何事情但是它提供了许多可以帮助您理清技能运行逻辑的通用选项。
 
 - `checkDurabilityBound` 触发前检查物品的耐久上下界，一旦耐久超出上下界空技能将不会被触发。
-- `costByEnchantment`
+- `costByEnchantment` 
 - `doEnchReduceCost` 类似于耐久附魔 ，可以降低道具耐久消耗(几率性不消耗耐久)
 - `enchCostPercentage` 每一附魔等级可以减少耐久消耗的几率
 - `enchantmentType` 附魔名字，可以像`minecraft:unbreaking`
@@ -303,7 +302,7 @@
 
 让附魔来增强伤害量。
 
-- `mode` 可以是增加量`ADDITION`或是倍率增加`MULTIPLICATION`
+- `mode` 可以是增加量 `ADDITION` 或是倍率增加 `MULTIPLICATION`
 - `amountPerLevel` 每一附魔等级增加百分比，1 = 100%
 - `enchantmentType` 详见：https://hub.spigotmc.org/javadocs/spigot/org/bukkit/enchantments/Enchantment.html
 
@@ -444,7 +443,7 @@
 - `playLocation` 生成位置
   - `HIT_LOCATION` 击中位置
   - `SELF` 自身
-  - `TARGET` 目标
+  - `TARGET` 光标指向位置
 - `force` 是否设置粒子为随时可见
 - `particle` 粒子类型
 - `particleCount` 粒子数量
@@ -499,22 +498,22 @@
 - `yield` 爆炸物的爆炸半径
 - `isIncendiary` 是否会点燃，默认设置为`false`
 - `projectileType` 弹射物类型，可以是下列内容：
-  - `arrow`
-  - `snowball`
-  - `fireball`
-  - `smallfireball`
-  - `llamaspit`
-  - `shulkerbullet`
-  - `dragonfireball`
-  - `trident`
-  - `skull`
+  - `arrow` 箭矢
+  - `snowball` 雪球
+  - `fireball` 火焰弹
+  - `smallfireball` 烈焰人的火焰球
+  - `llamaspit` 羊驼口水
+  - `shulkerbullet` 潜影弹
+  - `dragonfireball` 龙息弹
+  - `trident` 三叉戟
+  - `skull` 凋零头颅
 - `suppressArrow` 取消箭矢的发射但仍然消耗箭矢
 - `applyForce` 是否应用弓的拉伸力度到箭矢与火焰弹上，会影响到飞行速度
-- `firingLocation` 发射位置，可以是自身`SELF`或是目标`TARGET`
-- `firingR` 极坐标参数
-- `firingTheta` 极坐标参数
-- `firingPhi` 极坐标参数
-- `firingRange`
+- `firingLocation` 发射位置，可以是自身 `SELF` 或是光标指向位置 `TARGET`
+- `firingRange` 发射位置最远距离
+- `firingR` 极坐标R参数
+- `firingTheta` 极坐标θ参数
+- `firingPhi` 极坐标ρ参数
 - `castOff`
 
 ## 南瓜头（Pumpkin）
@@ -526,7 +525,7 @@
 
 ## 彩虹（Rainbow）
 
-发射各种颜色的羊毛。
+随机发射各种颜色的羊毛。
 
 - `count` 发射数量
 - `isFire` 是否发射火焰
@@ -544,15 +543,15 @@
 
 - `durability` 每一个修复材料会回复或是消耗的耐久量
 - `display` 在道具lore中展示的信息。
-- `material` 用与修复的材料。你可以使用`HAND`来将主手中持有的物品作为修复材料。
+- `material` 用与修复的材料。你可以使用 `HAND` 来将主手中持有的物品作为修复材料。
 - `isSneak` 是否在潜行状态时才能触发。
-- `mode` 可以是默认`DEFAULT`，允许超出上限`ALLOW_OVER`或是总是可以修复`ALWAYS`。
-- `allowBreak` 是否会把道具修爆，默认设置为`true`
+- `mode` 可以是默认 `DEFAULT` ，允许超出上限 `ALLOW_OVER` 或是总是可以修复 `ALWAYS` 。
+- `allowBreak` 是否会把道具修爆，默认设置为 `true`
 - `abortOnSuccess` 是否在修理成功后中止后续技能
 - `abortOnFailure` 是否在修理失败后中止后续技能(比如没有材料了)
 - `customMessage` 在聊天栏中展示的信息
 - `amount` 每次触发时会消耗的最大材料量
-- `showFailMsg` 是否显示修理失败后的信息。默认设置为`true`
+- `showFailMsg` 是否显示修理失败后的信息。默认设置为 `true`
 
 ## 拯救（Rescue）
 
@@ -598,7 +597,7 @@
 - `playLocation` 播放中心
   - `HIT_LOCATION` 击中位置
   - `SELF` 自身
-  - `TARGET` 目标
+  - `TARGET` 光标指向位置
 - `sound` 声音类型
 - `volume` 音量
 
