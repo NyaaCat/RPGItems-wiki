@@ -123,7 +123,7 @@ unused:
     - `license` 默认的许可文本。该文本将在物品配置被他人导入时显示。
     - `enchant_mode` 道具附魔模式。
       - `DISALLOW` 禁止附魔
-      - `PERMISSION` 需要拥有 `rpgitem.enchant [item_name]` 权限后才可附魔
+      - `PERMISSION` 需要拥有 `rpgitem.enchant.[item_name]` 权限后才可附魔
       - `ALLOW` 无需权限，允许附魔
     - `allow_anvil_enchant` 是否允许通过铁砧附魔。
     
