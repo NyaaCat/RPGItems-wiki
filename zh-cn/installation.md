@@ -68,13 +68,14 @@ general:
   item:
     fs_lock: false
     show_loaded: false
+    item_stack_uuid: true
 command:
   list:
     item_per_page: 9
     power_per_page: 5
 support:
   world_guard:
-    enable: false
+    enable: true
     force_refresh: false
     disable_in_no_pvp: true
     show_warning: true
@@ -86,9 +87,11 @@ item:
     numeric_bar: false
     force_bar: false
     license: All Right Reserved
-    enchant_mode: ALLOW
-    allow_anvil_enchant: false
+    enchant_mode: DISALLOW
+    allow_anvil_enchant: true
 unused:
   locale_inv: false
+
 ```
 
+- 默认情况下插件使用的语言为英文，如果需要使用中文，请将`language:en_US`改为`language:zh_CN`。
