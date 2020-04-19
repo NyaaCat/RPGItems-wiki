@@ -31,13 +31,13 @@ Change the item model to diamond sword.
 
 Change the item model to leather helmet with color #66CCFF.
 
-You can also use customModelData:
+You can also use customModelData (1.15.2+):
 
 ```
 /rpgitem customModel mysword 1234567
 ```
 
-You can toggle the status to use custom model:
+You can toggle the status to use custom model (pre-1.13.2):
 
 ```
 /rpgitem customitemmodel mysword
