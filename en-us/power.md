@@ -226,10 +226,10 @@ Execute command with delay.
 Power dummy do nothing but provides a bunch of universal options to help you make item logic execution clean.
 
 - `checkDurabilityBound` Check durability bound before trigger. Once durability out of bound the dummy will not be triggered.
-- `costByEnchantment`
+- `costByEnchantment` Calculate cost by Enchantments, needed for `doEnchReduceCost`
 - `doEnchReduceCost` Enchantment like durability can reduce cost (chance not to cost)
 - `enchCostPercentage` Percentage not to cost for each enchantment level
-- `enchantmentType` Enchantment name like `minecraft:unbreaking`
+- `enchantmentType` Enchantment name like `unbreaking` (default value)
 - `costbyDamage` Cost value by damage
 - `cooldownKey` When there are multiple dummy power, set a unique key string to make cooldowns independent
 - `successResult` Action after this dummy is successfully executed, defaults to `OK` which will continue with next power.
