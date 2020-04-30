@@ -115,6 +115,14 @@ To clear default enchantments on an item, use
 /rpgitems removeitemflag mysword HIDE_ENCHANTS
 ```
 
+## Attribute Update
+
+By default attribute modifiers won't be updated for existing items (`PARTIAL_UPDATE`). To change this, you need to instruct the item to do `FULL_UPDATE`.
+
+```
+/rpgitem attributemode mysword FULL_UPDATE
+```
+
 ## Damage system
 
 ```
