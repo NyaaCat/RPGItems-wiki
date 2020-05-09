@@ -10,9 +10,9 @@
 ## 1.15.2 - v3.8
 
 - [Vault](https://www.spigotmc.org/resources/vault.34315/)
-- [NyaaCore](https://ci.nyaacat.com/job/NyaaCore/362/artifact/build/libs/NyaaCore-mc1.15.2-7.1.362-shadowed.jar)
+- [NyaaCore](https://ci.nyaacat.com/job/NyaaCore/366/artifact/build/libs/NyaaCore-mc1.15.2-7.2.366-shadowed.jar)
 - [LangUtils](https://ci.nyaacat.com/job/LanguageUtils/25/artifact/build/libs/LangUtils-mc1.15.1-2.3.25.jar)
-- [RPGItems](https://ci.nyaacat.com/job/RPGItems-reloaded/job/1.15/77/artifact/build/libs/RPGItems-mc1.15-3.8-77-release.jar)
+- [RPGItems](https://ci.nyaacat.com/job/RPGItems-reloaded/job/1.15/85/artifact/build/libs/RPGItems-mc1.15-3.8-85-release.jar)
 
 ## 1.14.4
 
@@ -44,18 +44,18 @@
 
 我们同时推荐安装以下插件：
 
-- EssentialsX
-- WorldEdit / FAWE
-- WorldGuard
+- [EssentialsX](https://www.spigotmc.org/resources/essentialsx.9089)
+- [WorldEdit](https://dev.bukkit.org/projects/worldedit)
+- [WorldGuard](https://dev.bukkit.org/projects/worldguard)
 - [NyaaUtils](https://ci.nyaacat.com/job/NyaaUtils/261/artifact/build/libs/NyaaUtils-mc1.15.1-7.1.261.jar)
 
 # 插件设置
 
-在使用**RPGItems**时插件会默认生成一份配置文件。
+在使用 **RPGItems** 时插件会默认生成一份配置文件。
 
-在大多数情况下您不需要去修改这个文件，但是设置文件中的部分设置可能会对您有用。
+在大多数情况下您不需要去修改这个文件，但是配置文件中的部分设置可能会对您有用。
 
-这是一份插件的默认设置文件：
+这是一份插件的默认配置文件：
 
 ```
 language: en_US
@@ -66,15 +66,16 @@ general:
   - zh_CN
   give_perms: false
   item:
-    fs_lock: false
+    fs_lock: true
     show_loaded: false
+    item_stack_uuid: true
 command:
   list:
     item_per_page: 9
     power_per_page: 5
 support:
   world_guard:
-    enable: false
+    enable: true
     force_refresh: false
     disable_in_no_pvp: true
     show_warning: true
@@ -86,9 +87,43 @@ item:
     numeric_bar: false
     force_bar: false
     license: All Right Reserved
-    enchant_mode: ALLOW
-    allow_anvil_enchant: false
+    enchant_mode: DISALLOW
+    allow_anvil_enchant: true
 unused:
   locale_inv: false
-```
 
+```
+## config 配置文件说明
+
+- language 插件使用的语言。默认情况下插件使用的语言为英文，如果需要使用中文，请将 `language: en_US` 改为 `language: zh_CN` 。
+- general 设置：
+  - `enabled_languages` 可使用的语言。
+  - `give_perms` 使用 `/rpgitem give` 时是否需要额外权限。
+  - item
+    - `fs_lock` 请勿修改此项。是否保护道具配置文件完整性。在 Windows 服务器中锁定道具配置文件。
+    - `show_loaded` 是否在启动时显示载入的文件。
+    - `item_stack_uuid` 是否在给予道具时为道具赋予独特的uuid来防止道具堆叠。此项可能会影响 shopkeepers 等经济插件中的道具交易。
+- command 设置
+  - list 
+    - `item_per_page` 使用 `/rpgitem list` 命令时每页列出的道具量。
+    - `power_per_page` 使用 `/rpgitem power list` 命令时每页列出的技能数。
+- support 设置
+  - world_guard
+    - `enable` 是否启用 Worldguard 插件支持。
+    - `force_refresh` 是否在玩家使用物品时强制刷新 WorldGuard 保护区。仅当遇到WorldGuard相关问题时启用。
+    - `disable_in_no_pvp` 是否在非PVP区域禁用 RPGItems 。
+    - `show_warning` 当玩家在非PVP区域使用 RPGItems 时是否发送警告。
+- gist 设置
+  - `token`
+  - `publish` 
+- item 设置
+  - default 制作道具时的默认生效配置。
+    - `numeric_bar` 是否默认使用数字显示耐久度。
+    - `force_bar` 是否默认显示耐久度。
+    - `license` 默认的许可文本。该文本将在物品配置被他人导入时显示。
+    - `enchant_mode` 道具附魔模式。
+      - `DISALLOW` 禁止附魔。
+      - `PERMISSION` 需要拥有 `rpgitem.enchant.[item_name]` 权限后才可附魔。
+      - `ALLOW` 无需权限，允许附魔。
+    - `allow_anvil_enchant` 是否允许通过铁砧附魔。
+    
