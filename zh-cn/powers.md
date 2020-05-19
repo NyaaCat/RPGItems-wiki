@@ -259,10 +259,10 @@
 空技能虽然不会做任何事情但是它提供了许多可以帮助您理清技能运行逻辑的通用选项。
 
 - `checkDurabilityBound` 触发前检查物品的耐久上下界，一旦耐久超出上下界空技能将不会被触发。
-- `costByEnchantment` 
+- `costByEnchantment` 依赖附魔来计算耐久消耗，用于`doEnchReduceCost`
 - `doEnchReduceCost` 类似于耐久附魔 ，可以降低道具耐久消耗(几率性不消耗耐久)
 - `enchCostPercentage` 每一附魔等级可以减少耐久消耗的几率
-- `enchantmentType` 附魔名字，可以像`minecraft:unbreaking`
+- `enchantmentType` 附魔名字，可以像`unbreaking`（默认）
 - `costbyDamage` 根据伤害消耗耐久值
 - `cooldownKey` 当有多个空技能时,设定一个唯一的string字符串来让冷却时间互相独立
 - `successResult` 在空技能成功执行后的动作，默认值为`OK`，用于继续执行下一个技能
@@ -573,6 +573,18 @@
 ## 计分板（Scoreboard）
 
 修改玩家的计分板标签或数值。
+
+- `objective` 计分项
+- `delay` 延时，单位Ticks
+- `reverseTagAfterDelay` 是否在延时后回收tag
+- `scoreOperation` 分数计算规则
+   - `ADD_SCORE` 增加分数
+   - `NO_OP`
+   - `RESET_SCORE` 重置分数
+   - `SET_SCORE` 设置分数
+- `tag` 增加的tag
+- `team` 队伍名
+- `value` 分数值
 
 ## 潜影弹（Shulkerbullet）
 
