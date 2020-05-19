@@ -18,3 +18,4 @@ RPGItems支持通过扩展插件来添加新的技能、条件、标记，也可
 
 - [RPGItems-ext-inf](https://github.com/NyaaCat/rpgitems-ext-inf) 用于联动 [InfiniteInfernal](https://github.com/NyaaCat/InfiniteInfernal) 的扩展插件, 一款也提供了Rage/Mana系统的自定义怪物控制插件。
 - [RPGItems-ext-throwable](https://github.com/NyaaCat/rpgitems-ext-throwable) 让每一样物品都可以发射出去！ - 发射任何物品，支持自定义模型数据并且可以像箭矢一样造成伤害。需要protocolLib才可以正常使用。
+- [RPGItems-ext-minion](https://github.com/NyaaCat/RPGItems-ext-minion) 召唤随从同你作战！
