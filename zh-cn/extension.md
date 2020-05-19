@@ -4,7 +4,7 @@ RPGItems支持通过扩展插件来添加新的技能、条件、标记，也可
 
 ## 安装扩展插件
 
-将扩展插件的jar文件放入 `plugins/RPGItems/ext` 文件夹内, 并且执行 `/rpgitems reload` 就可以使扩展内容生效。
+将扩展插件的jar文件放入 `plugins/RPGItems/ext` 文件夹内, 并且执行 `/rpgitem reload` 就可以使扩展内容生效。
 
 ## 开发相关
 
