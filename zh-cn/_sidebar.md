@@ -8,5 +8,6 @@
 - [条件列表](conditions.md)
 - [技能列表](powers.md)
 - [修改器列表](modifier.md)
+- [扩展插件](extension.md)
 - [常见问题](faq.md)
  
