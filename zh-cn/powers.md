@@ -176,7 +176,7 @@
 
 使用时执行命令。
 
-- `command` 执行的命令. 当命令中包含空格时请使用`` ` ``符号。示例：`` command:\`minecraft:give {player} stone\` ``
+- `command` 执行的命令. 当命令中包含空格时请使用`` ` ``符号。示例：`` command:`minecraft:give {player} stone` ``
 - `display` 在道具描述中显示的展示名
 - `permission` 执行命令所需要的命令节点
 
