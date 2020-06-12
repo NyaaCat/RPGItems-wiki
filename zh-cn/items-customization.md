@@ -112,7 +112,15 @@
 ```
 
 ```
-/rpgitems removeitemflag mysword HIDE_ENCHANTS
+/rpgitem removeitemflag mysword HIDE_ENCHANTS
+```
+
+## 道具属性更新（Attribute Update）
+
+默认的情况下道具的属性修改不会应用给已经分发出去的道具（`PARTIAL_UPDATE`）。如果你想让已经存在的道具也进行更新，可以使用 `FULL_UPDATE` 
+
+```
+/rpgitem attributemode mysword FULL_UPDATE
 ```
 
 ## 道具伤害设置（Damage）
