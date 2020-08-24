@@ -13,7 +13,7 @@ Please find corresponding server version to download RPGItems.
 * [Vault](https://www.spigotmc.org/resources/vault.34315/)
 * [NyaaCore](https://ci.nyaacat.com/job/NyaaCore/job/1.15/3/artifact/build/libs/NyaaCore-mc1.15-7.2.3-shadowed.jar)
 * [LangUtils](https://ci.nyaacat.com/job/LanguageUtils/job/1.15/2/artifact/build/libs/LangUtils-mc1.15.1-2.3.2.jar)
-* [RPGItems](https://ci.nyaacat.com/job/RPGItems-reloaded/job/1.15/106/artifact/build/libs/RPGItems-mc1.15-3.8-106-release.jar)
+* [RPGItems](https://ci.nyaacat.com/job/RPGItems-reloaded/job/1.15/107/artifact/build/libs/RPGItems-mc1.15-3.8-107-release.jar)
 
 ## 1.14.4
 
