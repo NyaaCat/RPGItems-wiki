@@ -12,7 +12,7 @@
 - [Vault](https://www.spigotmc.org/resources/vault.34315/)
 - [NyaaCore](https://ci.nyaacat.com/job/NyaaCore/367/artifact/build/libs/NyaaCore-mc1.15.2-7.2.367-shadowed.jar)
 - [LangUtils](https://ci.nyaacat.com/job/LanguageUtils/25/artifact/build/libs/LangUtils-mc1.15.1-2.3.25.jar)
-- [RPGItems](https://ci.nyaacat.com/job/RPGItems-reloaded/job/1.15/95/artifact/build/libs/RPGItems-mc1.15-3.8-95.jar)
+- [RPGItems](https://ci.nyaacat.com/job/RPGItems-reloaded/job/1.15/107/artifact/build/libs/RPGItems-mc1.15-3.8-107-release.jar)
 
 ## 1.14.4
 
