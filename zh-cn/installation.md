@@ -7,6 +7,13 @@
 
 你可以在下方寻找对应您服务器版本的 **RPGItems**。
 
+## 1.16.4 - v3.8
+
+* [Vault](https://www.spigotmc.org/resources/vault.34315/)
+* [NyaaCore](https://ci.nyaacat.com/job/NyaaCore/job/1.16/18/artifact/build/libs/NyaaCore-mc1.16.4-8.0.18-shadowed.jar)
+* [LangUtils](https://ci.nyaacat.com/job/LanguageUtils/job/1.16/3/artifact/build/libs/LangUtils-mc1.16.1-2.4.3.jar)
+* [RPGItems](https://ci.nyaacat.com/job/RPGItems-reloaded/job/1.16/7/artifact/build/libs/RPGItems-mc1.16.1-3.81.16-7-release.jar)
+
 ## 1.15.2 - v3.8
 
 - [Vault](https://www.spigotmc.org/resources/vault.34315/)
