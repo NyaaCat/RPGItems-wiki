@@ -16,8 +16,9 @@
 - `requiredContext` 限制技能执行的一个值。
 - `requireHurtByEntity` 当触发设置为 `HURT` 或 `HIT_TAKEN` 时，将此值设置为 `true` 可以使仅来自于生物的有源伤害能够触发技能（不包括中毒、凋零、火焰、摔落伤害等）。默认为 `true`  。
 - `selectors` 技能选择器，使技能仅对部分实体生效。如需为技能指定选择器，首先使用 `markers` 标记定义一个选择器，并将技能中的 `selectors` 参数设置为选择器的id。
-- `setBaseDamage` 设置为 true 时，后续的伤害加成技能将基于此伤害值计算，武器的最终伤害取叠加值。 设置为 false 时，后续的伤害加成技能将基于原伤害值计算，武器的最终伤害取最高值。 默认为 false。
-
+- `setBaseDamage` 设置为 true 时，后续的伤害加成技能将基于此伤害值计算，武器的最终伤害取叠加值。 设置为 `false` 时，后续的伤害加成技能将基于原伤害值计算，武器的最终伤害取最高值。 默认为 `false` 。
+- `powerId` 用于模板技能占位符的ID。
+- `powerTags` 暂无作用
 
 以下是用来修改一个道具技能的命令:
 
@@ -156,7 +157,7 @@
 - `firingR` 极坐标R参数
 - `firingTheta` 极坐标θ参数
 - `firingPhi` 极坐标ρ参数
-- `castOff`
+- `castOff` 
 
 ## 取消箭矢（CancelBowArrow）
 
