@@ -12,14 +12,14 @@
 * [Vault](https://www.spigotmc.org/resources/vault.34315/)
 * [NyaaCore](https://ci.nyaacat.com/job/NyaaCore/job/1.16/18/artifact/build/libs/NyaaCore-mc1.16.4-8.0.18-shadowed.jar)
 * [LangUtils](https://ci.nyaacat.com/job/LanguageUtils/job/1.16/3/artifact/build/libs/LangUtils-mc1.16.1-2.4.3.jar)
-* [RPGItems](https://ci.nyaacat.com/job/RPGItems-reloaded/job/1.16/7/artifact/build/libs/RPGItems-mc1.16.1-3.81.16-7-release.jar)
+* [RPGItems](https://ci.nyaacat.com/job/RPGItems-reloaded/job/1.16/lastSuccessfulBuild/artifact/build/libs/RPGItems-mc1.16.4-3.8-15-release.jar)
 
 ## 1.15.2 - v3.8
 
 - [Vault](https://www.spigotmc.org/resources/vault.34315/)
-- [NyaaCore](https://ci.nyaacat.com/job/NyaaCore/367/artifact/build/libs/NyaaCore-mc1.15.2-7.2.367-shadowed.jar)
-- [LangUtils](https://ci.nyaacat.com/job/LanguageUtils/25/artifact/build/libs/LangUtils-mc1.15.1-2.3.25.jar)
-- [RPGItems](https://ci.nyaacat.com/job/RPGItems-reloaded/job/1.15/107/artifact/build/libs/RPGItems-mc1.15-3.8-107-release.jar)
+- [NyaaCore](https://ci.nyaacat.com/job/NyaaCore/job/1.15/lastSuccessfulBuild/artifact/build/libs/NyaaCore-mc1.15-7.2.7-shadowed.jar)
+- [LangUtils](https://ci.nyaacat.com/job/LanguageUtils/job/1.15/lastSuccessfulBuild/artifact/build/libs/LangUtils-mc1.15.1-2.3.4.jar)
+- [RPGItems](https://ci.nyaacat.com/job/RPGItems-reloaded/job/1.15/lastSuccessfulBuild/artifact/build/libs/RPGItems-mc1.15-3.8-108-release.jar)
 
 ## 1.14.4
 
@@ -54,7 +54,7 @@
 - [EssentialsX](https://www.spigotmc.org/resources/essentialsx.9089)
 - [WorldEdit](https://dev.bukkit.org/projects/worldedit)
 - [WorldGuard](https://dev.bukkit.org/projects/worldguard)
-- [NyaaUtils](https://ci.nyaacat.com/job/NyaaUtils/261/artifact/build/libs/NyaaUtils-mc1.15.1-7.1.261.jar)
+- [NyaaUtils](https://ci.nyaacat.com/job/NyaaUtils/job/1.16/lastSuccessfulBuild/artifact/build/libs/NyaaUtils-mc1.16.4-8.0.11.jar)
 
 # 插件设置
 
