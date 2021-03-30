@@ -196,6 +196,27 @@ Available formats:
 
 Toggle display/hide durability bar
 
+Use-based costs:
+
+```
+/rpgitem cost [item] [operation] [value]
+```
+
+`operation` could be
+
+- `toggle` - switch from percentage cost (based on damage, etc) or fixed value
+- `hit` - cost durability when get hit
+- `hitting` - cost durability when hitting with the item
+- `breaking` - cost durability when breaking blocks with the item
+
+For example, define an axe to cost 1 durability when breaking blocks, use
+
+```
+/rpgitem cost my_axe breaking 1
+```
+
+Leave `[value]` empty will return the current cost information.
+
 ## Permission
 
 ```
