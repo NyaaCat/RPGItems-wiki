@@ -14,6 +14,19 @@ Please find corresponding server version to download RPGItems.
 * [NyaaCore](https://ci.nyaacat.com/job/NyaaCore/job/main/lastSuccessfulBuild/artifact/build/libs/NyaaCore-9.4.jar)
 * [RPGItems](https://ci.nyaacat.com/job/RPGItems-reloaded/job/main/lastSuccessfulBuild/artifact/build/libs/RPGItems-mc1.21.1-3.9.7-release.jar)
 
+## 1.18 - v3.8
+
+* [Vault](https://www.spigotmc.org/resources/vault.34315/)
+* [NyaaCore](https://ci.nyaacat.com/job/NyaaCore/job/1.18/lastSuccessfulBuild/artifact/build/libs/NyaaCore-mc1.18.2-9.0.23-reobfed.jar)
+* [RPGItems](https://ci.nyaacat.com/job/RPGItems-reloaded/job/dev%252F1.18/lastSuccessfulBuild/artifact/build/libs/RPGItems-mc1.18-3.8.8-release.jar)
+
+## 1.17 - v3.8
+
+* [Vault](https://www.spigotmc.org/resources/vault.34315/)
+* [NyaaCore](https://ci.nyaacat.com/job/NyaaCore/job/1.17/lastSuccessfulBuild/artifact/build/libs/NyaaCore-mc1.17-8.1.19-shadowed.jar)
+* [LangUtils](https://ci.nyaacat.com/job/LanguageUtils/job/1.17/lastSuccessfulBuild/artifact/build/libs/LangUtils-mc1.17-2.5.4.jar)
+* [RPGItems](https://ci.nyaacat.com/job/RPGItems-reloaded/job/1.17/lastSuccessfulBuild/artifact/build/libs/RPGItems-mc1.17-3.8.27-release.jar)
+
 ## 1.16.4 - v3.8
 
 * [Vault](https://www.spigotmc.org/resources/vault.34315/)
