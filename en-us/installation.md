@@ -8,6 +8,12 @@ After downloaded all the required jar file into your plugins directory, please *
 
 Please find corresponding server version to download RPGItems.
 
+## 1.21.1 - v3.9
+
+* [Vault](https://www.spigotmc.org/resources/vault.34315/)
+* [NyaaCore](https://ci.nyaacat.com/job/NyaaCore/job/main/lastSuccessfulBuild/artifact/build/libs/NyaaCore-9.4.jar)
+* [RPGItems](https://ci.nyaacat.com/job/RPGItems-reloaded/job/main/lastSuccessfulBuild/artifact/build/libs/RPGItems-mc1.21.1-3.9.7-release.jar)
+
 ## 1.16.4 - v3.8
 
 * [Vault](https://www.spigotmc.org/resources/vault.34315/)
