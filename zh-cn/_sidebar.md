@@ -1,5 +1,6 @@
 - [主页](README.md)
 - [安装与配置](installation.md)
+- [配置文件](configuration.md)
 - [基础命令](basic-commands.md)
 - [制作道具](items-customization.md)
 - [入门教程](beginning.md)
@@ -8,6 +9,8 @@
 - [条件列表](conditions.md)
 - [技能列表](powers.md)
 - [修改器列表](modifier.md)
+- [外部集成](integrations.md)
+- [进阶技巧](advanced.md)
 - [扩展插件](extension.md)
 - [常见问题](faq.md)
  

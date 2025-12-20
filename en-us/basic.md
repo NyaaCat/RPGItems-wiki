@@ -8,10 +8,10 @@ Here is a list of basic commands to manage and customize items.
 /rpgitem create myitem
 ```
 
-## Delete
+## Remove
 
 ```
-/rpgitem delete myitem
+/rpgitem remove myitem
 ```
 
 ## List
@@ -96,4 +96,48 @@ Items are stored in `items/` directory under RPGItems plugin directory.
 ```
 
 Will print raw item configuration content in YAML format for further inspection.
+
+## Save All
+
+```
+/rpgitem save-all
+```
+
+Saves all items to disk.
+
+## Version
+
+```
+/rpgitem version
+```
+
+Displays the current RPGItems plugin version.
+
+## Give Permissions Toggle
+
+```
+/rpgitem giveperms
+```
+
+Toggles whether the give command requires permission (`rpgitem.give.<itemname>`).
+
+## Item Info
+
+```
+/rpgitem info
+```
+
+Display detailed information about the RPGItem in your main hand. Shows item properties and whether the item is a model.
+
+Requires permission: `rpgitem.info`
+
+## Convert to Model
+
+```
+/rpgitem tomodel
+```
+
+Converts the RPGItem in your main hand to a model (static copy without power functionality).
+
+Requires permission: `rpgitem.tomodel`
 

@@ -8,8 +8,16 @@ There are some general power properties:
 
 - `cooldown` Cooldown ticks before next use
 - `cost` Cost to durability for each use
-- `condition` Conditions to meet in order to trigger this power
-- `trigger` Triggers of this power
+- `conditions` Conditions to meet in order to trigger this power
+- `triggers` Triggers of this power
+- `displayName` Display name for this power
+- `selectors` Entity selectors for filtering targets
+- `powerId` Unique identifier for this power
+- `powerTags` Tags for grouping powers
+- `showCooldownWarning` Whether to show cooldown warning message (default: true)
+- `requiredContext` Context required for this power to activate
+- `requireHurtByEntity` When trigger is `HURT` or `HIT_TAKEN`, set to `true` to only trigger on entity damage (not fire, poison, etc.). Default: `true`
+- `setBaseDamage` For damage-modifying powers, set to `true` to use dynamic damage as base for subsequent powers
 
 Command to modify power on an item:
 
@@ -31,165 +39,217 @@ E.g.,
 
 ## AOE
 
-Applies effect to targets in an area.
+Applies potion effect to targets in an area.
 
-- `amplifier` Effect amplifier
-- `duration` Effect duration
-- `range` Radius of area
-- `selfapplication` Whether the effect applies to yourself
-- `name` Effect name, see https://hub.spigotmc.org/javadocs/spigot/org/bukkit/potion/PotionEffectType.html
+- `amplifier` Effect amplifier level (default: 1)
+- `duration` Effect duration in ticks (default: 15)
+- `range` Radius of area in blocks (default: 5)
+- `selfapplication` Whether the effect applies to yourself (default: true)
+- `type` Effect type, see https://hub.spigotmc.org/javadocs/spigot/org/bukkit/potion/PotionEffectType.html
+- `display` Custom display text
+- `count` Maximum number of targets, -1 for unlimited (default: -1)
+- `angle` Cone angle from your direction, 0 to 180 (default: 180)
+- `target` Target filter: `ALL`, `MOBS`, or `PLAYERS` (default: ALL)
 
 ## AOECommand
 
-Let all targets within a range to execute command.
+Let all targets within a range execute a command.
 
-- `type` Target type, can be
-  - `entity`
-  - `player`
-  - `mobs`
-- `r` Target range
-- `rm` Minimum range
-- `facing` Angle in your direction. value from 0 to 180
-- `c` Target count
-- `mustsee` There must be no block between you and target
+- `type` Target type: `entity`, `player`, or `mobs` (default: entity)
+- `r` Maximum target range in blocks (default: 10)
+- `rm` Minimum range in blocks (default: 0)
+- `facing` Angle from your direction, value from 0 to 180 (default: 30)
+- `c` Maximum target count (default: 100)
+- `mustsee` Require line of sight to target (default: false)
 - `command` The command to execute
-- `permission` The permission to assign for execution of the command
+- `permission` Permission to assign for execution of the command
+- `selfapplication` Include yourself in targets (default: false)
 
 ## AOEDamage
 
-Deals damage to a range of targets.
+Deals damage to targets in an area.
 
-- `range` Maximum target selection range
-- `minrange` Minimum target selection range
-- `angle` Angle from your direction, value from 0 to 180
-- `count` Number of targets can be attacked
-- `incluePlayers` (typo) include players when triggering power
-- `selfapplication` Apply to yourself when triggering power
-- `mustsee` There must be no block between you and target
-- `damage` Damage amount to deal, this is independent with item damage property
-- `delay` Delay ticks before actual apply damage
-- `selectAfterDelay` When delay is not 0, set this to false to select target on use, so that target will be damaged even it's out of range.
-- `firingRange`
-- `firingLocation` Define location of AOE center, can be `SELF` or `TARGET`
-- `castOff` When `firingLocation` is `TARGET` and delay is not 0, set this to true to set center on use before delay
+- `range` Maximum target selection range in blocks (default: 10)
+- `minrange` Minimum target selection range (default: 0)
+- `angle` Cone angle from your direction, 0 to 180 (default: 180)
+- `count` Maximum number of targets (default: 100)
+- `includePlayers` Include players when triggering power (default: false)
+- `selfapplication` Apply to yourself when triggering (default: false)
+- `mustsee` Require line of sight to target (default: false)
+- `damage` Damage amount, independent of item damage property (default: 0)
+- `delay` Delay in ticks before applying damage (default: 0)
+- `selectAfterDelay` When delay > 0, set to `false` to select targets on use (default: false)
+- `suppressMelee` Suppress melee hit trigger (default: false)
+- `firingLocation` AOE center location: `SELF` or `TARGET` (default: SELF)
+- `firingRange` Maximum distance for TARGET firing location (default: 64)
+- `castOff` When `firingLocation` is `TARGET` and delay > 0, set to `true` to set center before delay (default: false)
 
 ## Airborne
 
-Damage boost when flying.
+Damage boost when flying or in the air.
+
+- `percentage` Damage increase percentage (default: 50)
+- `cap` Maximum damage cap (default: 300.0)
+- `setBaseDamage` Use dynamic damage as base for subsequent powers (default: false)
 
 ## Arrow
 
-Deprecated. Use `Projectile`.
+Fires an arrow on use. This is the basic arrow power - for more advanced projectiles, use `Projectile`.
 
-## Attachment
+- `cooldown` Cooldown in ticks (default: 0)
+- `cost` Durability cost (default: 0)
+- `setShooter` Whether to set the player as arrow shooter (default: false)
 
-Trigger power from other items.
+## Attachments
+
+Trigger powers from other RPG items in inventory.
+
+- `allowInvSlots` Allowed inventory slots, -1 to disable
+- `allowItems` Allowed RPGItem names
+- `limit` Maximum number of attachments
 
 ## Attract
 
-Pull or push entity.
+Pull or push entities toward/away from a location.
 
-- `radius` Radius to select target
-- `maxSpeed` Maximum speed to pull/push entity
-- `duration` Duration time to pull/push entity
-- `attractingTickCost` Cost per tick for using this power
-- `attractingEntityTickCost` Cost per tick per entity for using this power
-- `attractPlayer` Whether it will pull/push player
-- `firingLocation` Can be `SELF` or `TARGET`
-- `firingRange`
+- `radius` Selection radius in blocks (default: 5)
+- `maxSpeed` Maximum pull/push speed (default: 0.4)
+- `duration` Duration in ticks (default: 5)
+- `attractingTickCost` Durability cost per tick (default: 0)
+- `attractingEntityTickCost` Durability cost per entity per tick (default: 0)
+- `attractPlayer` Whether to affect players (default: false)
+- `firingLocation` Effect center: `SELF` or `TARGET` (default: SELF)
+- `firingRange` Maximum distance for TARGET (default: 64)
 
 ## Beam
 
-Fire a beam made by particle. This is by far the most complex and powerful power in RPGItems.
+Fire a beam made of particles. This is the most complex and powerful power in RPGItems.
 
-- `length` Maximum beam length
-- `ttl` Time to live ticks
-- `particle` Particle type, see https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Particle.html
-- `mode` Can be `BEAM` (run in 1 tick) or `PROJECTILE` (run in multiple ticks)
-- `pierce` Number of targets that can be pierced through
-- `ignoreWall` Ignore wall when flying, defaults to `true`
-- `damage` Damage deal when contact, this is independent with damage property in item config
-- `speed` Beam flying speed, block per second
-- `offsetX` particle offsetX
-- `offsetY` particle offsetY
-- `offsetZ` particle offsetZ
-- `particleSpeed` particle speed parameter
-- `particleDensity` how many particle spawn dots in one block space
-- `cone` Angle from your direction to fire discrete beams
-- `homing` Radius for homing
-- `homingAngle` Angle from your direction to select target
-- `homingRange` Block distance to select target
-- `homingMode` Can be
-  - `ONE_TARGET` Lock on single target
-  - `MULTI_TARGET` Change target after last hit
-  - `MOUSE_TRACK` Lock on nearest target of mouse aim
-- `homingTarget` Can be `MOBS` / `ENTITY` / `PLAYER`
-- `ticksBeforeHoming` Ticks before homing path
-- `beamAmount` How many beam will be fired in a single run
-- `burstCount` How many beam will be fired in a single trigger
-- `burstInterval` Ticks between next burst
-- `bounce` How many times the beam will bounce off wall, require `ignoreWall` to `false`
-- `hitSelfWhenBounced` Beam may hit yourself when bounce off wall
-- `gravity` Gravity of beam, can be negative (trace goes up)
-- `extraData` Color of `REDSTONE` particle, in format of `r,g,b,size`. E.g., extraData:\`51,204,255,0.35\` for a cyan slim beam
-- `speedBias` Expression to control the flying speed. E.g., `4+x*10*t`
-- `behavior` Controls the beam behavior
-- `initialRotation`
-- `firingLocation` Can be `SELF` or `TARGET`
-- `effectOnly` Only act as effect, will not trigger HIT event
-- `firingR` Polar coordinates parameter
-- `firingTheta` Polar coordinates parameter
-- `firingPhi` Polar coordinates parameter
-- `firingRange`
-- `castOff`
+### Basic Properties
+- `length` Maximum beam length in blocks (default: 10)
+- `ttl` Time to live in ticks (default: 100)
+- `particle` Particle type, see https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Particle.html (default: LAVA)
+- `mode` Beam mode: `BEAM` (instant) or `PROJECTILE` (travels over time) (default: BEAM)
+- `damage` Damage dealt on contact (default: 20)
+- `speed` Beam travel speed in blocks per second (default: 20)
+
+### Piercing and Collision
+- `pierce` Number of entities the beam can pierce through (default: 0)
+- `ignoreWall` Pass through solid blocks (default: false)
+- `bounce` Number of times beam bounces off walls, requires `ignoreWall:false` (default: 0)
+- `hitSelfWhenBounced` Beam can hit you after bouncing (default: false)
+
+### Particle Settings
+- `offsetX` Particle X offset (default: 0)
+- `offsetY` Particle Y offset (default: 0)
+- `offsetZ` Particle Z offset (default: 0)
+- `particleSpeed` Particle speed parameter (default: 0)
+- `particleDensity` Particles per block (default: 2)
+- `extraData` Color for DUST particle: `r,g,b,size`. E.g., `extraData:51,204,255,0.35` for cyan
+
+### Spread and Burst
+- `cone` Angle for spread fire (default: 0)
+- `beamAmount` Beams fired per burst (default: 1)
+- `burstCount` Number of bursts per trigger (default: 1)
+- `burstInterval` Ticks between bursts (default: 10)
+
+### Homing
+- `homing` Homing radius, 0 to disable (default: 0)
+- `homingAngle` Maximum angle to acquire target (default: 30)
+- `homingRange` Maximum range to acquire target (default: 50)
+- `homingMode` Homing behavior:
+  - `ONE_TARGET` Lock onto single target
+  - `MULTI_TARGET` Switch targets after each hit
+  - `MOUSE_TRACK` Follow cursor aim
+- `homingTarget` What to home on: `MOBS`, `ENTITY`, or `PLAYER` (default: MOBS)
+- `ticksBeforeHoming` Delay before homing activates (default: 0)
+
+### Physics
+- `gravity` Beam gravity, can be negative for upward curve (default: 0)
+- `speedBias` Expression to control speed. Variables: `x` (distance), `t` (time). E.g., `4+x*10*t`
+
+### Advanced
+- `behavior` List of behavior modifiers. Available behaviors:
+  - `PLAIN` - Standard straight beam
+  - `DNA` - Double helix spiral pattern
+  - `CIRCLE` - Circular rotating pattern
+  - `LEGACY_HOMING` - Legacy homing algorithm
+  - `RAINBOW_COLOR` - Color-cycling rainbow effect
+  - `CONED` - Cone-shaped spread pattern
+  - `FLAT` - Flat horizontal beam
+  - `UNIFORMED` - Uniform particle distribution
+  - `CAST_LOCATION_ROTATED` - Rotates around cast point
+- `behaviorParam` JSON parameters for behaviors (default: "{}")
+- `initialRotation` Initial rotation angle (default: 0)
+- `effectOnly` Only visual, won't trigger HIT events (default: false)
+- `suppressMelee` Suppress melee damage on hit (default: false)
+
+### Firing Location
+- `firingLocation` Launch point: `SELF` or `TARGET` (default: SELF)
+- `firingRange` Maximum range for TARGET location (default: 64)
+- `firingR` Polar coordinate R offset
+- `firingTheta` Polar coordinate theta offset
+- `firingPhi` Polar coordinate phi offset
+- `castOff` Lock target location before delay (default: false)
 
 ## CancelBowArrow
 
 Cancels bow arrow. Arrow will not be consumed and no arrow is fired. Often used on bows with other powers.
 
+- `cancelArrow` Whether to cancel the arrow (default: true)
+
 ## Charge
 
 Damage boost when sprinting.
 
-- `percentage` Damage increase percentage
-- `speedPercentage` Damage increase percentage by speed
-- `setBaseDamage` Set to true to use dynamic damage as base, otherwise use damage property in item config
-- `cap` Maximum damage cap
+- `percentage` Base damage increase percentage (default: 30)
+- `speedPercentage` Additional percentage based on speed (default: 20)
+- `cap` Maximum damage cap (default: 300)
+- `setBaseDamage` Use dynamic damage as base (default: false)
 
 ## Command
 
 Execute command on use.
 
-- `command` Command to execute. Use \` to quote with space, e.g., `command:\`minecraft:give {player} stone\``
-- `display` Message to display in lore
-- `permission` Permission to assign just for executing the command
+- `command` Command to execute. Use backticks for spaces: `` command:`minecraft:give {player} stone` ``
+- `display` Message shown in item lore (default: "Runs command")
+- `permission` Permission granted temporarily for command execution. Special values:
+  - `console` Execute as console
+  - `*` Execute with OP permissions
+- `cooldown` Cooldown in ticks (default: 0)
+- `cost` Durability cost (default: 0)
 
 Variables available in command:
 
-- `{player}` the user's name
-- `{player.x}` the user's X coordinate
-- `{player.y}` the user's Y coordinate
-- `{player.z}` the user's Z coordinate
-- `{player.yaw}` the user's yaw coordinate
-- `{player.pitch}` the user's pitch
+- `{player}` Player name
+- `{player.x}` Player X coordinate
+- `{player.y}` Player Y coordinate
+- `{player.z}` Player Z coordinate
+- `{player.yaw}` Player yaw rotation
+- `{player.pitch}` Player pitch rotation
+- `{yaw}` Player yaw (alternative format)
+- `{pitch}` Player pitch (alternative format)
+
+If PlaceholderAPI is installed, placeholders are resolved before execution.
 
 ## CommandHit
 
 Execute command on hit.
 
-- `command` Command to execute.
-- `permission` Permission to assign just for executing the command
-- `minDamage` Minimum damage to deal in order to trigger this power
+- `command` Command to execute
+- `permission` Permission for command execution
+- `minDamage` Minimum damage required to trigger (default: 0)
 
-Variables available in command:
+Inherits all variables from Command, plus:
 
-- `{entity}` the target's name
-- `{entity.uuid}` the target's UUID
-- `{entity.x}` the target's X coordinate
-- `{entity.y}` the target's Y coordinate
-- `{entity.z}` the target's Z coordinate
-- `{entity.yaw}` the target's yaw coordinate
-- `{entity.pitch}` the target's pitch
+- `{entity}` Target entity name
+- `{entity.uuid}` Target UUID
+- `{entity.x}` Target X coordinate
+- `{entity.y}` Target Y coordinate
+- `{entity.z}` Target Z coordinate
+- `{entity.yaw}` Target yaw rotation
+- `{entity.pitch}` Target pitch rotation
+- `{damage}` Damage dealt
 
 ## Consume
 
@@ -201,86 +261,171 @@ Consume item on hit.
 
 ## CriticalHit
 
-Deals critical hit.
+Deals critical hit with configurable chance and multipliers.
 
-- `chance` Chance to trigger the power
-- `backstabchance` Chance to backstab
-- `factor` Damage multiplier
-- `backstabFactor` Damage multiplier when backstab
-- `setBaseDamage` Set to true to use dynamic damage as base, otherwise use damage property in item config
+- `chance` Critical hit chance percentage (default: 20)
+- `backstabChance` Backstab critical chance percentage (default: 0)
+- `factor` Critical damage multiplier (default: 1.5)
+- `backstabFactor` Backstab damage multiplier (default: 1.5)
+- `setBaseDamage` Use dynamic damage as base (default: false)
+
+## Dash
+
+Dash in a specified direction. Applies velocity to the player.
+
+- `direction` Dash direction (default: FORWARD):
+  - `FORWARD` - Direction player is facing
+  - `BACKWARD` - Opposite to facing direction
+  - `LEFT` - Left relative to facing
+  - `RIGHT` - Right relative to facing
+  - `UP` - Straight up
+  - `DOWN` - Straight down
+  - `RANDOM` - Random 3D direction
+  - `RANDOM_HORIZONTAL` - Random horizontal direction
+  - `RANDOM_VERTICAL` - Random vertical direction
+  - `NORTH` - World north (-Z)
+  - `SOUTH` - World south (+Z)
+  - `EAST` - World east (+X)
+  - `WEST` - World west (-X)
+- `speed` Dash speed multiplier (default: 1)
 
 ## DeathCommand
 
-A chance to kill target and execute command.
+A chance to instantly kill target and execute command.
+
+- `chance` Kill probability as 1/N (default: 20)
+- `command` Command to execute on kill
+- `desc` Description text for item lore
+- `count` Number of times to execute command (default: 1)
+- `permission` Permission for command execution
 
 ## Deflect
 
-Deflect incoming projectile.
+Deflect incoming projectiles.
+
+- `chance` Passive deflect chance percentage (default: 50)
+- `cooldownpassive` Passive deflect cooldown in ticks (default: 0)
+- `duration` Active deflect duration in ticks (default: 50)
+- `facing` Maximum deflect angle from your direction, 0 to 180 (default: 30)
+- `deflectCost` Durability cost per deflection (default: 0)
 
 ## DelayedCommand
 
-Execute command with delay.
+Execute command after a delay.
+
+- `delay` Delay in ticks before execution (default: 20)
+- `command` Command to execute
+- `display` Display text for item lore
+- `permission` Permission for command execution
+- `cmdInPlace` Execute at original location (default: false)
 
 ## Dummy
 
-Power dummy do nothing but provides a bunch of universal options to help you make item logic execution clean.
+Power dummy does nothing but provides control options for power execution flow.
 
-- `checkDurabilityBound` Check durability bound before trigger. Once durability out of bound the dummy will not be triggered.
-- `costByEnchantment` Calculate cost by Enchantments, needed for `doEnchReduceCost`
-- `doEnchReduceCost` Enchantment like durability can reduce cost (chance not to cost)
-- `enchCostPercentage` Percentage not to cost for each enchantment level
-- `enchantmentType` Enchantment name like `unbreaking` (default value)
-- `costbyDamage` Cost value by damage
-- `cooldownKey` When there are multiple dummy power, set a unique key string to make cooldowns independent
-- `successResult` Action after this dummy is successfully executed, defaults to `OK` which will continue with next power.
-- `costResult` Action after cost. Defaults to `COST` which deals the cost and continue with next power. Set to `ABORT` to break and abort the whole process, `OK` to ignore the cost and continue with next power.
-- `cooldownResult` Action after cooldown. Defaults to `COOLDOWN` which break execution of dummy but continue with next power. Set `ABORT` to break and abort the whole process, `OK` to ignore cooldown and continue with next power.
-- `showCDwarning` If you wish not to show cooldown warning message, set to `false`.
-- `globalCooldown` Set the cooldown to global.
+- `checkDurabilityBound` Check durability bounds before trigger (default: true)
+- `costByEnchantment` Use enchantment for cost calculation (default: false)
+- `doEnchReduceCost` Enchantment can reduce cost (default: false)
+- `enchCostPercentage` Cost reduction per enchantment level (default: 6)
+- `enchantmentType` Enchantment name (default: "unbreaking")
+- `costByDamage` Cost based on damage dealt (default: false)
+- `cooldownKey` Unique key for independent cooldowns (default: "dummy")
+- `successResult` Action after success: `OK`, `ABORT` (default: OK)
+- `costResult` Action after cost: `COST`, `ABORT`, `OK` (default: COST)
+- `cooldownResult` Action on cooldown: `COOLDOWN`, `ABORT`, `OK` (default: COOLDOWN)
+- `showCDWarning` Show cooldown warning message (default: true)
+- `globalCooldown` Apply cooldown globally to all players (default: false)
+- `display` Display text
 
-**Use PowerDummy to disbale cooldown message, unify and control cooldown / cost.**
+**Use PowerDummy to disable cooldown messages, unify and control cooldown / cost.**
 
-You should already acknowledge that RPGitems execute powers based on trigger, like `RIGHT_CLICK` or `LEFT_CLICK` and activate power one by one in a pitfall. So if you have an item with a list of powers like:
+Powers execute based on triggers like `RIGHT_CLICK` or `LEFT_CLICK`, activating powers one by one in order. For example:
 
 1. PowerProjectile, trigger `LEFT_CLICK`
 2. PowerBeam, trigger `RIGHT_CLICK`
 3. PowerSound, trigger `RIGHT_CLICK`
 4. PowerParticle, trigger `LEFT_CLICK`
 
-When you do left click, only 1 and 4 will be activated. The item firstly shoot a projectile and then play a particle, but in a single tick.
+Left click only activates 1 and 4 in a single tick.
 
-Now if you want to cost 1 durability on each left click use, with 20 ticks cooldown and do not wish to show the duplicated cooldown message, you can add PowerDummy at first place, and set `cooldown:20 cooldownKey:left cooldownResult:ABORT cost:1 showCDWarning:false triggers:LEFT_CLICK`. You should also set PowerProjectile and PowerParticle's `cost` and `cooldown` to 0, indicating you do not need them and only using PowerDummy to control everything.
-
-RPGitem will first check PowerDummy, and if it's in cooldown then abort the whole execution process, which means projectile and particle powers will not be activated. If it's not cooling down and all conditions (if any) are met, cost 1 then continue with power execution (fire a projectile and play particle).
-
-Similarly, if you set `costResult` to `ABORT`, when the item durability less than its lower bound, the power execution will be aborted.
-
-Please note dummy power options is effective only with correct trigger. If you set dummy with `RIGHT_CLICK` trigger, it will not affect any power with triggers other than `RIGHT_CLICK`.
+To cost 1 durability per left click with 20 tick cooldown and no message:
+1. Add PowerDummy first: `cooldown:20 cooldownKey:left cooldownResult:ABORT cost:1 showCDWarning:false triggers:LEFT_CLICK`
+2. Set other powers' `cost` and `cooldown` to 0
 
 ## Economy
 
-Operates economy functions.
+Operates economy functions (requires Vault).
+
+- `coolDown` Cooldown in ticks (default: 0)
+- `amountToPlayer` Amount to give (positive) or take (negative)
+- `showFailMessage` Show error message on failure
+- `abortOnFailure` Abort power chain on failure (default: true)
 
 ## EnchantedHit
 
 Make enchantment boost damage.
 
-- `mode` Can be `ADDITION` or `MULTIPLICATION`
-- `amountPerLevel` Boost percentage per enchant level, 1 = 100%
-- `enchantmentType` See https://hub.spigotmc.org/javadocs/spigot/org/bukkit/enchantments/Enchantment.html
-- `setBaseDamage` Set to true to use dynamic damage as base, otherwise use damage property in item config
+- `mode` Calculation mode: `ADDITION` or `MULTIPLICATION` (default: ADDITION)
+- `amountPerLevel` Damage increase per enchant level, 1 = 100% (default: 1)
+- `enchantmentType` Enchantment type, see https://hub.spigotmc.org/javadocs/spigot/org/bukkit/enchantments/Enchantment.html (default: POWER)
+- `setBaseDamage` Use dynamic damage as base (default: false)
+- `display` Display text
 
 ## EvalDamage
 
-Set damage based on expression.
+Calculate damage using mathematical expressions. Uses the EvalEx library.
+
+- `expression` Expression for entity damage calculation (required)
+- `playerExpression` Separate expression when target is a player
+- `setBaseDamage` Use result as base damage (default: false)
+- `display` Display text
+
+### Available Variables
+
+- `damage` - Base damage value
+- `finalDamage` - Final calculated damage
+- `attackCooldown` - Player attack cooldown (0.0 to 1.0)
+- `isDamageByProjectile` - 1 if projectile damage, 0 otherwise
+- `damagerTicksLived` - How long the damager has existed (ticks)
+- `distance` - Distance between player and target
+- `playerYaw`, `playerPitch` - Player rotation
+- `playerX`, `playerY`, `playerZ` - Player coordinates
+- `entityType` - Target entity type name (e.g., "ZOMBIE")
+- `entityYaw`, `entityPitch` - Entity rotation
+- `entityX`, `entityY`, `entityZ` - Entity coordinates
+- `entityLastDamage` - Entity's last damage taken
+- `cause` - Damage cause enum name (e.g., "ENTITY_ATTACK")
+
+### Available Functions
+
+- `scoreBoard(name)` - Get player's scoreboard score
+- `context(key)` - Get value from power context
+- `now()` - Current timestamp in milliseconds
+
+### PlaceholderAPI Support
+
+If PlaceholderAPI is installed, placeholders in expressions are resolved before evaluation.
+Use `target:` prefix in playerExpression for target player placeholders.
+
+Example:
+```
+/rpgitem power add mysword rpgitems:evaldamage expression:"damage * (1 + distance / 10)"
+```
 
 ## Explosion
 
 Cause explosion on use.
 
+- `distance` Maximum distance for explosion (default: 20)
+- `chance` Trigger chance percentage (default: 20)
+- `explosionPower` Explosion power/radius (default: 4.0)
+
 ## Fire
 
-Ignite target.
+Create a trail of fire.
+
+- `distance` Fire trail length in blocks (default: 15)
+- `burnduration` Burn duration in ticks (default: 40)
 
 ## Fireball
 
@@ -288,185 +433,365 @@ Deprecated. Use `Projectile`.
 
 ## Flame
 
-Shoots a bunch of fire.
+Ignite hit targets.
+
+- `burntime` Burn duration in ticks (default: 20)
 
 ## Food
 
-Restores saturation level.
+Restores hunger/saturation.
+
+- `foodpoints` Food points to restore (required)
 
 ## ForceField
 
-Summon a forcefield to trap or block target.
+Summon a force field barrier.
+
+- `radius` Barrier radius in blocks (default: 5)
+- `height` Barrier height in blocks (default: 30)
+- `base` Barrier base offset, can be negative (default: -15)
+- `ttl` Time to live in ticks (required, default: 100)
+- `wallMaterial` Material for walls (default: WHITE_WOOL)
+- `barrierMaterial` Material for barrier blocks (default: BARRIER)
 
 ## Glove
 
-Catch and throw entity.
+Catch and throw entities.
 
-## Gunfu
+- `maxDistance` Maximum catch distance (default: 5)
+- `maxTicks` Maximum hold time in ticks (default: 200)
+- `throwSpeed` Throw velocity (default: 0.0)
 
-Projectiles will homing to target.
+## GunFu
+
+Make projectiles home toward targets.
+
+- `distance` Target detection range (default: 20)
+- `viewAngle` Maximum angle to detect targets (default: 30)
+- `initVelFactor` Initial velocity factor (default: 0.5)
+- `velFactor` Velocity adjustment per tick (default: 0.05)
+- `forceFactor` Homing force multiplier (default: 1.5)
+- `maxTicks` Maximum homing duration (default: 200)
+- `delay` Delay before homing starts (default: 0)
 
 ## Headshot
 
-Damage boost when hit target head.
+Damage boost when hitting target's head.
+
+- `factor` Damage multiplier (default: 1.5)
+- `particleEnemy` Show particles on hit enemy (default: true)
+- `soundSelf` Play sound for shooter (default: true)
+- `soundEnemy` Play sound for target (default: false)
+- `setBaseDamage` Use dynamic damage as base (default: false)
 
 ## Ice
 
-Shoots ice and form an ice block.
+Shoots ice and creates ice blocks.
 
 ## Knockup
 
-Knockup target on hit.
+Launch target into the air on hit.
 
-## Lifesteal
+- `chance` Trigger probability as 1/N (default: 20)
+- `knockUpPower` Launch power (default: 2)
 
-Gain health on hit. 
+## LifeSteal
+
+Heal based on damage dealt.
+
+- `chance` Trigger probability as 1/N (default: 20)
+- `factor` Heal multiplier (default: 1)
 
 ## Lightning
 
 Summon lightning strike.
 
+- `chance` Strike probability as 1/N (default: 20)
+
+## Mending
+
+Enhanced mending behavior.
+
+- `repairFactor` Experience to durability ratio (default: 2)
+- `requireEnchantment` Require mending enchantment (default: false)
+
 ## Mount
 
-Ride on entity.
+Ride on entities.
+
+- `maxDistance` Maximum mount distance (default: 5)
+- `maxTicks` Maximum ride duration (default: 200)
+
+## MythicSkillCast
+
+Cast MythicMobs skills (requires MythicMobs plugin).
+
+- `skill` Skill name to cast
+- `suppressArrow` Cancel arrow when cast (default: false)
+- `applyForce` Force value (default: "NaN")
 
 ## NoImmutableTick
 
-Ignore immutable tick.
+Reduce or remove damage immunity ticks.
+
+- `immuneTime` Immunity time in ticks (default: 1)
 
 ## ParticleBarrier
 
-Summon ParticleBarrier to reduce damage taken and give you power.
+Convert incoming damage to particle barrier energy.
+
+- `barrierHealth` Barrier health pool (default: 40)
+- `energyPerBarrier` Energy gained per barrier (default: 40)
+- `energyDecay` Energy decay per second (default: 1.5)
+- `energyPerLevel` Energy needed per effect level (default: 10)
+- `projected` Whether barrier is projected (default: false)
+- `effect` Potion effect granted by barrier (default: STRENGTH)
 
 ## Particle
 
-Plays particle on use or hit.
+Play particles on use or hit.
+
+- `particle` Particle type
+- `effect` Effect type (legacy)
+- `particleCount` Number of particles (default: 1)
+- `offsetX` X spread (default: 0)
+- `offsetY` Y spread (default: 0)
+- `offsetZ` Z spread (default: 0)
+- `extra` Extra data/speed (default: 1)
+- `force` Force render for all players (default: false)
+- `material` Material for block particles
+- `dustColor` Color for dust particles as integer (default: 0)
+- `dustSize` Size for dust particles (default: 0)
+- `playLocation` Where to spawn: `SELF`, `HIT_LOCATION`, `TARGET`, `ENTITY` (default: HIT_LOCATION)
+- `delay` Delay in ticks (default: 0)
+- `firingRange` Range for TARGET location (default: 20)
 
 ## ParticleTick
 
-Plays particle when holding or wearing.
+Continuously play particles while holding or wearing.
+
+All parameters from Particle, plus:
+- `interval` Spawn interval in ticks (default: 15)
 
 ## PotionHit
 
-Applies potion effect on hit.
+Apply potion effect on hit.
+
+- `type` Potion effect type (required)
+- `duration` Effect duration in ticks (default: 20)
+- `amplifier` Effect level (default: 1)
+- `chance` Trigger probability as 1/N (default: 20)
+- `summingUp` Stack amplifier with other PotionHit powers (default: false)
 
 ## PotionSelf
 
-Applies potion effect to user.
+Apply potion effect to yourself.
+
+- `type` Potion effect type
+- `duration` Effect duration in ticks
+- `amplifier` Effect level
+- `clear` Clear all effects instead (default: false)
 
 ## PotionTick
 
-Applies potion effect when holding or wearing.
+Continuously apply potion effect while holding or wearing.
+
+- `type` Potion effect type
+- `amplifier` Effect level
+- `interval` Application interval in ticks
 
 ## Projectile
 
-Fires projectile with many options.
+Fire projectiles with extensive options.
 
-- `isCone` if the projectile fires in a cone. Defaults to `false`
-- `gravity` if the projectile affected by gravity. Defaults to `true`
-- `range` cone angle from your direction
-- `amount` amount of projectile in a single run
-- `speed` projectile flying speed
-- `burstCount` how many projectiles will be fired
-- `burstInterval` ticks between next burst run
-- `setFireballDirection` fireball will not float if set to `true`
-- `yield` may cause explosion, defaults to `false`
-- `isIncendiary` may cause fire, defaults to `false`
-- `projectileType` type of projectile, can be
-  - `arrow`
-  - `snowball`
-  - `fireball`
-  - `smallfireball`
-  - `llamaspit`
-  - `shulkerbullet`
-  - `dragonfireball`
-  - `trident`
-  - `skull`
-- `suppressArrow` Cancels arrow when firing from bow, but arrow will still be consumed
-- `applyForce` apply bow force for arrow and fireball, affects speed
-- `firingLocation` Can be `SELF` or `TARGET`
-- `firingR` Polar coordinates parameter
-- `firingTheta` Polar coordinates parameter
-- `firingPhi` Polar coordinates parameter
-- `firingRange`
-- `castOff`
+### Basic Settings
+- `projectileType` Projectile type (required):
+  - `arrow`, `snowball`, `fireball`, `smallfireball`
+  - `llamaspit`, `shulkerbullet`, `dragonfireball`
+  - `trident`, `skull`, `egg`
+- `speed` Projectile speed (default: 1)
+- `gravity` Affected by gravity (default: true)
+
+### Spread and Burst
+- `isCone` Fire in a cone pattern (default: false)
+- `range` Cone angle (default: 15)
+- `amount` Projectiles per burst (default: 5)
+- `burstCount` Number of bursts (default: 1)
+- `burstInterval` Ticks between bursts (default: 1)
+
+### Projectile Behavior
+- `setFireballDirection` Fireball follows aim (default: false)
+- `yield` Explosion radius (default: 0)
+- `isIncendiary` Causes fire (default: false)
+- `pierceLevel` Pierce through entities (default: 0)
+- `suppressArrow` Cancel arrow from bow (default: false)
+- `applyForce` Apply bow draw force (default: false)
+
+### Egg Settings
+- `eggShouldHatch` Egg can spawn chicken (default: true)
+- `eggHatchEntity` Entity spawned (default: "CHICKEN")
+- `eggHatchNumber` Number spawned, -1 for random (default: -1)
+
+### Fireball Settings
+- `fireballItem` Item displayed in fireball (default: "FIRE_CHARGE")
+
+### Firing Location
+- `firingLocation` Launch from: `SELF` or `TARGET` (default: SELF)
+- `firingRange` Range for TARGET location (default: 64)
+- `firingR` Polar coordinate R offset
+- `firingTheta` Polar coordinate theta offset
+- `firingPhi` Polar coordinate phi offset
+- `initialRotation` Initial rotation angle (default: 0)
+- `castOff` Lock target before delay (default: false)
 
 ## Pumpkin
 
-Force target wear a pumpkin head.
+Force target to wear a pumpkin head.
+
+- `chance` Trigger probability as 1/N (default: 20)
+- `drop` Pumpkin drop chance (default: 0)
 
 ## Rainbow
 
-Shoots colorful wool.
+Shoots colorful wool blocks.
+
+- `count` Number of wool blocks (default: varies)
+- `isFire` Add fire (default: false)
 
 ## RealDamage
 
-Deals real damage, ignores armor.
+Deal damage that bypasses armor.
+
+- `realDamage` Amount of true damage to deal
+- `minDamage` Minimum hit damage required to trigger (default: 0)
 
 ## Repair
 
-Consume material to restore (or cost) durability.
+Consume materials to repair or damage durability.
 
-- `durability` Durability restored (or cost) per each repair material
-- `display` Message displayed in lore
-- `material` Repair material. Can be `HAND` to use item hold in mainhand.
-- `isSneak` Require sneak to trigger
-- `mode` Can be `DEFAULT`, `ALLOW_OVER` and `ALWAYS`
-- `allowBreak` defaults to `true`
-- `abortOnSuccess` abort and break execution after successfully triggered (repaired)
-- `abortOnFailure` abort and break execution after failed to repair (e.g., no material)
-- `customMessage` Message to display in chat
-- `amount` Maximum material amount to consume in each trigger
-- `showFailMsg` Show repair failed message or not. Default to `true`
+- `durability` Durability change per material (positive = repair)
+- `material` Repair material, or `HAND` for held item
+- `display` Message in item lore
+- `isSneak` Require sneaking to trigger
+- `mode` Mode: `DEFAULT`, `ALLOW_OVER`, `ALWAYS` (default: DEFAULT)
+- `allowBreak` Allow item to break (default: true)
+- `abortOnSuccess` Stop chain after successful repair (default: false)
+- `abortOnFailure` Stop chain on failure (default: false)
+- `customMessage` Chat message on repair
+- `amount` Maximum materials consumed per use
+- `showFailMsg` Show failure message (default: true)
 
 ## Rescue
 
-A better totem replacement.
+Prevent death and teleport to safety.
+
+- `healthTrigger` Health threshold to trigger rescue (default: 4)
+- `damageTrigger` Damage threshold to trigger rescue (default: 1024)
+- `useBed` Teleport to bed spawn (default: true)
+- `inPlace` Rescue in place instead of teleport (default: false)
 
 ## Rumble
 
-Summon a wave to blow target to sky.
+Send a shockwave through the ground.
+
+- `power` Knockup power (default: 2)
+- `distance` Wave travel distance (default: 15)
+- `damage` Damage dealt (default: 0)
 
 ## Scoreboard
 
-Operates on scoreboard.
+Modify player scoreboard values and tags.
 
-## Shulkerbullet
+- `objective` Scoreboard objective name
+- `scoreOperation` Operation: `NO_OP`, `ADD_SCORE`, `SET_SCORE`, `RESET_SCORE` (default: NO_OP)
+- `value` Score value to set/add (default: 0)
+- `tag` Tags to add/remove: `ADD,!REMOVE` format
+- `team` Teams to join/leave: `JOIN,!LEAVE` format
+- `delay` Delay in ticks (default: 20)
+- `reverseTagAfterDelay` Undo tag changes after delay (default: false)
+- `abortOnSuccess` Stop chain after success (default: false)
 
-Shoots shulkerbullet that homing to target.
+## ShulkerBullet
 
-## Skyhook
+Shoots homing shulker bullets.
 
-Hook to specific block.
+- `range` Homing range (default: varies)
+
+## SkyHook
+
+Hook onto specific blocks and travel along them.
+
+- `railMaterial` Block material to hook (default: GLASS)
+- `hookDistance` Maximum hook distance (default: 10)
+- `hookingTickCost` Durability cost per tick while hooked (default: 0)
 
 ## Sound
 
-Plays sound on use or hit.
+Play sound on use or hit.
+
+- `sound` Sound name (Minecraft sound ID)
+- `volume` Sound volume (default: 1.0)
+- `pitch` Sound pitch (default: 1.0)
+- `delay` Delay in ticks (default: 0)
+- `playLocation` Where to play: `SELF`, `HIT_LOCATION`, `TARGET` (default: HIT_LOCATION)
+- `firingRange` Range for TARGET location (default: 20)
+- `display` Display text (default: "Plays sound")
 
 ## Stuck
 
-Cause targets not to move or teleport.
+Prevent targets from moving or teleporting.
+
+- `chance` Trigger probability as 1/N (default: 3)
+- `duration` Stuck duration in ticks (default: 100)
+- `range` AOE range in blocks (default: 10)
+- `facing` Cone angle (default: 30)
+- `costAoe` Durability cost for AOE use (default: 0)
+- `costPerEntity` Durability cost per entity (default: 0)
 
 ## TNTCannon
 
-Shoots TNT.
+Shoots primed TNT.
 
 ## Teleport
 
-Teleport for a distance.
+Teleport in the direction you're looking.
+
+- `distance` Maximum teleport distance (default: 5)
+- `targetMode` How to find destination:
+  - `DEFAULT` Block iteration
+  - `RAY_TRACING` Ray trace to surface
+  - `RAY_TRACING_EXACT` Precise ray trace
+  - `RAY_TRACING_SWEEP` Ray trace with player collision
+  - `RAY_TRACING_EXACT_SWEEP` Precise with collision
+- `particle` Particle effect (default: "PORTAL")
+- `sound` Sound effect (default: "entity.enderman.teleport")
 
 ## Throw
 
-Throw entity.
+Spawn and throw entities.
+
+- `entityName` Entity type to throw (required)
+- `speed` Throw velocity (required)
+- `display` Display text for lore (required)
+- `entityData` Additional entity NBT data
+- `isPersistent` Save entity to world (default: false)
 
 ## TippedArrow
 
-Deprecated. Use Projectile and PotionHit
+Deprecated. Use Projectile and PotionHit together.
 
 ## Torch
 
-Shoots some torches to light up a place.
+Throws torches to light up areas.
 
 ## Translocator
 
-Shoots a translocator and swap your position.
+Throw a beacon and teleport to it.
+
+- `speed` Beacon throw speed
+- `setupCost` Durability cost to throw beacon
+- `tpCost` Durability cost to teleport
+
+## Undead
+
+Special effects for undead targets.

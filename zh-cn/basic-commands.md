@@ -10,10 +10,10 @@
 /rpgitem create myitem
 ```
 
-## 删除道具
+## 移除道具
 
 ```
-/rpgitem delete myitem
+/rpgitem remove myitem
 ```
 
 ## 道具列表
@@ -100,4 +100,48 @@
 ```
 
 生成一个记录了道具原始设置的YAML文件，用于检查
+
+## 保存所有道具
+
+```
+/rpgitem save-all
+```
+
+将所有道具保存到磁盘。
+
+## 查看版本
+
+```
+/rpgitem version
+```
+
+显示当前RPGItems插件版本。
+
+## 给与权限控制
+
+```
+/rpgitem giveperms
+```
+
+切换give命令是否需要权限 (`rpgitem.give.<道具名>`)。
+
+## 道具信息
+
+```
+/rpgitem info
+```
+
+显示主手中RPGItem的详细信息，包括道具属性和是否为模型。
+
+需要权限: `rpgitem.info`
+
+## 转换为模型
+
+```
+/rpgitem tomodel
+```
+
+将主手中的RPGItem转换为模型（不具有技能功能的静态副本）。
+
+需要权限: `rpgitem.tomodel`
 

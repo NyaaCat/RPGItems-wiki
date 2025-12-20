@@ -37,12 +37,6 @@
 /rpgitem customModel mysword 1234567
 ```
 
-同时你也可以控制自定义模型使用的开启与关闭(pre-1.13.2):
-
-```
-/rpgitem customitemmodel mysword
-```
-
 ## 道具描述设置（Lore）
 
 添加一行描述
@@ -62,13 +56,13 @@
 插入一行描述
 
 ```
-/rpgitem description insert 1 `&cRed inserted description`
+/rpgitem description [item] insert 1 `&cRed inserted description`
 ```
 
 移除一行描述
 
 ```
-/rpgitem description remove 0
+/rpgitem description [item] remove 0
 ```
 
 默认情况下，道具属性与技能将会作为lore显示，如果你不希望它们显示出来, 你可以使用以下命令来开启或关闭它们的显示状态：
@@ -105,6 +99,18 @@
 /rpgitem enchantment mysword clear
 ```
 
+添加指定附魔：
+
+```
+/rpgitem enchantment mysword add sharpness 5
+```
+
+移除指定附魔：
+
+```
+/rpgitem enchantment mysword remove sharpness
+```
+
 ## 道具设置（Flags）
 
 ```
@@ -138,8 +144,13 @@
 以下是可以设置的模式:
 
 - `FIXED` 使用RPGItems设置的伤害值
-- `ADDITIONAL` 使用RPGItems设置的伤害值 + 原版物品伤害值 (包含物品的附魔与属性修改)
+- `FIXED_WITHOUT_EFFECT` 固定伤害，忽略效果
+- `FIXED_RESPECT_VANILLA` 固定伤害，应用原版修正
+- `FIXED_WITHOUT_EFFECT_RESPECT_VANILLA` 固定伤害无效果，应用原版修正
 - `VANILLA` 仅使用原版物品的伤害值
+- `ADDITIONAL` 使用RPGItems设置的伤害值 + 原版物品伤害值 (包含物品的附魔与属性修改)
+- `ADDITIONAL_RESPECT_VANILLA` 附加伤害，应用原版修正
+- `MULTIPLY` 乘以原版伤害值
 
 ```
 /rpgitem damageType mysword melee
@@ -163,6 +174,12 @@
 
 护甲伤害将会使用表达式计算并且略过其他的处理 (比如附魔等...)
 
+你也可以设置玩家特定的护甲表达式：
+
+```
+/rpgitem playerArmorExpression myhelmet <expression>
+```
+
 ## 道具耐久系统（Durability）
 
 ```
@@ -176,6 +193,12 @@
 ```
 
 设置道具耐久的下界与上界分别为2与1001。
+
+```
+/rpgitem durability mysword default 500
+```
+
+设置新生成道具的默认耐久值为500。
 
 ```
 /rpgitem durability mysword barformat [FORMAT]
@@ -200,5 +223,7 @@
 ## 道具权限设置（Permission）
 
 ```
-/rpgitem permission mysword rpgitem.use.mysword
+/rpgitem permission mysword rpgitem.use.mysword true
 ```
+
+权限命令需要三个参数：道具名、权限字符串和启用状态（true/false）。
