@@ -283,7 +283,7 @@ Notes:
 
 - All commands are hot-updated immediately; no manual yml editing required
 - Use `/rpgitem socket <item> info` to inspect current socket config
-- Then use `/rpgitem socket` to open GUI and edit instance sockets
+- Then use `/rpgitems socketing` to open GUI and edit instance sockets (admin alias: `/rpgitem socketing`)
 
 ### Container fields
 

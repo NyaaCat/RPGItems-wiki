@@ -152,10 +152,11 @@
 ### 打开镶嵌 GUI
 
 ```
-/rpgitem socket
+/rpgitems socketing
 ```
 
-- 需要权限：`rpgitem.socket`（管理员）
+- 需要权限：`rpgitems.socketing`（用户）
+- 管理员兼容命令：`/rpgitem socketing`（`rpgitem.socketing`）
 - 打开后使用 3 行箱子界面编辑主道具的镶嵌
 - 取回中间槽位道具时会立即关闭 GUI
 

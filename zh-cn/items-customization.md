@@ -262,7 +262,7 @@
 
 - 全部命令即时生效，不需要手动改 yml
 - 可用 `/rpgitem socket <item> info` 查看当前配置
-- 设置完后用 `/rpgitem socket` 打开 GUI 进行实例镶嵌
+- 设置完后用 `/rpgitems socketing` 打开 GUI 进行实例镶嵌（管理员也可用 `/rpgitem socketing`）
 
 ### 容器配置
 

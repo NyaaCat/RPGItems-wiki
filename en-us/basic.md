@@ -148,10 +148,11 @@ Requires permission: `rpgitem.tomodel`
 ### Open Socket GUI
 
 ```
-/rpgitem socket
+/rpgitems socketing
 ```
 
-- Permission: `rpgitem.socket` (admin)
+- Permission: `rpgitems.socketing` (user)
+- Admin alias: `/rpgitem socketing` (`rpgitem.socketing`)
 - Opens a 3-row chest GUI for editing sockets on an item instance
 - Taking back the center item closes the GUI immediately
 
