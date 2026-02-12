@@ -145,3 +145,28 @@
 
 需要权限: `rpgitem.tomodel`
 
+## 镶嵌与物品等级
+
+> 本节内容适用于 RPGItems `3.9` 版本。
+
+### 打开镶嵌 GUI
+
+```
+/rpgitem socket
+```
+
+- 需要权限：`rpgitem.socket`（管理员）
+- 打开后使用 3 行箱子界面编辑主道具的镶嵌
+- 取回中间槽位道具时会立即关闭 GUI
+
+### 查询/设置道具实例等级
+
+```
+/rpgitem level get <item>
+/rpgitem level set <item> <level>
+```
+
+- 需要权限：`rpgitem.level`（管理员）
+- 仅作用于主手中的**道具实例**
+- `<item>` 必须与主手道具匹配
+- 等级最小值为 `1`

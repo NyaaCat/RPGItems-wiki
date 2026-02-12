@@ -249,3 +249,95 @@ Leave `[value]` empty will return the current cost information.
 
 The permission command takes three arguments: item, permission string, and enabled (true/false).
 
+## Socketing System
+
+> This section applies to RPGItems `3.9`.
+
+Socketing treats one RPGItem as a container and merges multiple RPGItems as sockets into a single item instance.
+
+Runtime order is: `container -> socket1 -> socket2 -> ...`.
+
+- `condition`: shared and evaluated as one set
+- `marker`: processed sequentially
+- `power`: triggered sequentially by trigger order
+
+### Container fields
+
+```yaml
+socketAcceptTags:
+  - GEM
+  - RUNE
+socketMaxWeight: 10
+socketInsertLine: 1
+```
+
+- `socketAcceptTags`: accepted socket tags (match any)
+- `socketMaxWeight`: max total socket weight
+- `socketInsertLine`: lore insertion line for socket descriptions (`0-based`)
+
+### Socket item fields
+
+```yaml
+socketTags:
+  - GEM
+socketWeight: 3
+socketMinLevel: 2
+socketingDescription:
+  - "&7[Gem] +10 Damage"
+```
+
+- `socketTags`: tags provided by this socket item
+- `socketWeight`: weight cost
+- `socketMinLevel`: minimum container level
+- `socketingDescription`: lore lines inserted after socketing
+
+### Matching rules
+
+- Empty `socketAcceptTags`: accepts no sockets (default)
+- Empty `socketTags`: matches no tags
+- Special tag `ANY`: wildcard for any tag
+- Socket is invalid if tag mismatch, level too low, or weight overflow
+
+### Lore behavior
+
+- Instance lore only inserts `socketingDescription`
+- Newly created items default to hidden armor lore and power lore
+
+## Item Level and LevelDescription
+
+> This section applies to RPGItems `3.9`.
+
+Every item **instance** starts at level `1`. Level and sockets are persisted in per-instance PDC data.
+
+### LevelDescription example
+
+```yaml
+description:
+  - "Great Sword"
+  - "Damage: &650"
+leveldescription:
+  "0":
+    level: 3
+    operation: replaceline
+    line: 1
+    newlines:
+      - "Damage: &6100"
+      - "Critical: &c20%"
+  "1":
+    level: 5
+    operation: replacewhole
+    line: 0
+    newlines:
+      - "Great Sword"
+      - "Damage: &6200"
+      - "Critical: &c25%"
+      - "&7This is another lore"
+```
+
+Rules:
+
+- `line` is `0-based`
+- `replaceline`: replace starting from `line` with `newlines`
+- `replacewhole`: ignore `line`, replace the whole description
+- Select the smallest rule where `level >= currentLevel` (fallback to original description if none)
+- Replacement is always based on configured base `description`, not previous level output

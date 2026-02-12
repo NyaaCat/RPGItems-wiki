@@ -227,3 +227,96 @@
 ```
 
 权限命令需要三个参数：道具名、权限字符串和启用状态（true/false）。
+
+## 镶嵌系统（Socketing）
+
+> 本节内容适用于 RPGItems `3.9` 版本。
+
+镶嵌系统将一个 RPGItem 作为“容器道具”，并将其他 RPGItem 作为“镶嵌品”组合到该实例上。
+
+组合后的行为顺序为：`容器 -> 镶嵌1 -> 镶嵌2 -> ...`。
+
+- `condition`：共享并统一判定
+- `marker`：按顺序依次处理
+- `power`：按触发器顺序依次执行
+
+### 容器配置
+
+```yaml
+socketAcceptTags:
+  - GEM
+  - RUNE
+socketMaxWeight: 10
+socketInsertLine: 1
+```
+
+- `socketAcceptTags`：可接受的镶嵌标签（任意一个匹配即可）
+- `socketMaxWeight`：最大可承载重量
+- `socketInsertLine`：将镶嵌描述插入到 lore 的位置（`0-based`）
+
+### 镶嵌品配置
+
+```yaml
+socketTags:
+  - GEM
+socketWeight: 3
+socketMinLevel: 2
+socketingDescription:
+  - "&7[Gem] +10 Damage"
+```
+
+- `socketTags`：该镶嵌品的标签
+- `socketWeight`：镶嵌重量
+- `socketMinLevel`：可镶嵌的最低容器等级
+- `socketingDescription`：镶嵌后插入到容器 lore 的文本
+
+### 匹配规则
+
+- `socketAcceptTags` 为空：不接受任何镶嵌（默认）
+- `socketTags` 为空：不匹配任何标签
+- 特殊标签 `ANY`：可匹配任意标签
+- 若标签不匹配、超过可用重量、或容器等级不足，则该镶嵌无效
+
+### 显示规则
+
+- 实例 lore 只追加 `socketingDescription`
+- 新建道具默认不显示 armor lore 与 power lore
+
+## 物品等级与 LevelDescription
+
+> 本节内容适用于 RPGItems `3.9` 版本。
+
+每个道具**实例**默认等级为 `1`，等级与镶嵌数据都持久化在实例 PDC 中。
+
+### LevelDescription 配置示例
+
+```yaml
+description:
+  - "Great Sword"
+  - "Damage: &650"
+leveldescription:
+  "0":
+    level: 3
+    operation: replaceline
+    line: 1
+    newlines:
+      - "Damage: &6100"
+      - "Critical: &c20%"
+  "1":
+    level: 5
+    operation: replacewhole
+    line: 0
+    newlines:
+      - "Great Sword"
+      - "Damage: &6200"
+      - "Critical: &c25%"
+      - "&7This is another lore"
+```
+
+规则说明：
+
+- 行号 `line` 使用 `0-based`
+- `replaceline`：从 `line` 开始替换为 `newlines`
+- `replacewhole`：忽略 `line`，直接替换整段 description
+- 匹配时选择 `level >= 当前等级` 的最小规则（若不存在则使用原始 description）
+- 所有替换都基于配置中的原始 `description`，不是基于上一级结果

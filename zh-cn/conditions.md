@@ -185,6 +185,24 @@
 /rpgitem condition add myitem rpgitems:durabilitycondition id:low-durability durabilityMax:100
 ```
 
+### 物品等级条件（ItemLevelCondition）
+
+> 本节内容适用于 RPGItems `3.9` 版本。
+
+当道具实例等级满足比较条件时生效。
+
+**属性：**
+- `id` 唯一标识符（必需）
+- `level` 目标等级（默认：1）
+- `operation` 比较操作：`eq`、`gt`、`egt`、`lt`、`elt`（默认：`eq`）
+- `isStatic` 是否静态缓存（默认：true）
+- `isCritical` 失败时中止（默认：false）
+
+**示例：**
+```
+/rpgitem condition add myitem rpgitems:itemlevelcondition id:need-lv5 level:5 operation:egt
+```
+
 ## 表达式条件
 
 ### 动态条件（EvalCondition）
@@ -312,6 +330,7 @@
 | EquipmentCondition | 装备 | 静态 | slots, material, rpgitem |
 | DamageTypeCondition | 战斗 | 运行时 | damageType |
 | DurabilityCondition | 物品 | 运行时 | durabilityMin, durabilityMax |
+| ItemLevelCondition | 物品 | 静态/运行时 | level, operation |
 | EvalCondition | 表达式 | 运行时 | expression |
 | ScoreboardCondition | 计分板 | 运行时 | score, tag, team |
 | PlaceholderAPICondition | 外部 | 运行时 | placeholder, operator, value |

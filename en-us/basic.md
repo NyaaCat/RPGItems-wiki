@@ -141,3 +141,28 @@ Converts the RPGItem in your main hand to a model (static copy without power fun
 
 Requires permission: `rpgitem.tomodel`
 
+## Socketing and Item Level
+
+> This section applies to RPGItems `3.9`.
+
+### Open Socket GUI
+
+```
+/rpgitem socket
+```
+
+- Permission: `rpgitem.socket` (admin)
+- Opens a 3-row chest GUI for editing sockets on an item instance
+- Taking back the center item closes the GUI immediately
+
+### Get/Set Instance Level
+
+```
+/rpgitem level get <item>
+/rpgitem level set <item> <level>
+```
+
+- Permission: `rpgitem.level` (admin)
+- Works on the **item instance** in main hand
+- `<item>` must match the held RPGItem
+- Minimum level is `1`

@@ -178,6 +178,23 @@ Example:
 /rpgitem condition add myitem rpgitems:durabilitycondition id:low-durability durabilityMax:100
 ```
 
+### ItemLevelCondition
+
+> This section applies to RPGItems `3.9`.
+
+Returns true when the item instance level satisfies a comparison.
+
+- `id` Unique identifier (required)
+- `level` Target level (default: 1)
+- `operation` Comparison op: `eq`, `gt`, `egt`, `lt`, `elt` (default: `eq`)
+- `isStatic` Static cache behavior (default: true)
+- `isCritical` Abort on failure (default: false)
+
+Example:
+```
+/rpgitem condition add myitem rpgitems:itemlevelcondition id:need-lv5 level:5 operation:egt
+```
+
 ## Expression Conditions
 
 ### EvalCondition
@@ -301,6 +318,7 @@ Example:
 | EquipmentCondition | Equipment | Static | slots, material, rpgitem |
 | DamageTypeCondition | Combat | Runtime | damageType |
 | DurabilityCondition | Item | Runtime | durabilityMin, durabilityMax |
+| ItemLevelCondition | Item | Static/Runtime | level, operation |
 | EvalCondition | Expression | Runtime | expression |
 | ScoreboardCondition | Scoreboard | Runtime | score, tag, team |
 | PlaceholderAPICondition | External | Runtime | placeholder, operator, value |
