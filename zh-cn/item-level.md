@@ -70,6 +70,11 @@ leveldescription:
 - 当实例等级 `< socketMinLevel` 时，该镶嵌无效
 - GUI 状态提示会显示等级相关错误
 
+3.9 当前限制：
+
+- 暂不支持“镶嵌品自身等级”的持久化与判定
+- 镶嵌上下文中的 `itemlevelcondition` / `LevelDescription` 以容器实例等级为准
+
 ## 6. 使用流程
 
 ```bash

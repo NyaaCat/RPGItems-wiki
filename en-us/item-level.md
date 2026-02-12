@@ -70,6 +70,11 @@ Level is part of socket validation:
 - Socket is inactive when `itemLevel < socketMinLevel`
 - GUI status item reports level-related failures
 
+Current 3.9 limitation:
+
+- A socket item's own level is not persisted/evaluated in socket context
+- `itemlevelcondition` / `LevelDescription` in socket runtime use container instance level
+
 ## 6. Usage Flow
 
 ```bash

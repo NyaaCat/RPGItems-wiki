@@ -78,6 +78,13 @@ Socketing and level are stored in item instance PDC:
 
 > Socket data stores RPGItem IDs only, not full ItemStack snapshots.
 
+### 3.5 3.9 Limitation: no per-socket-item level support
+
+- `rgi_item_level` applies to the container item instance only
+- `rgi_sockets` stores socket RPGItem IDs only, without per-socket instance level
+- Therefore in 3.9, a socket item's own level is not persisted/evaluated after socketing
+- `itemlevelcondition` / `LevelDescription` in socket runtime context use container instance level
+
 ## 4. Runtime Logic (High Level)
 
 When an instance has level/socket data, RPGItems builds a runtime composite item.

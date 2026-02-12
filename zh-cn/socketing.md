@@ -78,6 +78,13 @@ socketingDescription:
 
 > 镶嵌只保存 RPGItem ID，不保存整个 ItemStack。
 
+### 3.5 3.9 当前限制：不支持镶嵌品自身等级
+
+- `rgi_item_level` 仅用于容器实例
+- `rgi_sockets` 仅保存镶嵌品 RPGItem ID，不保存镶嵌品实例等级
+- 因此在 3.9 中，镶嵌后暂不支持“镶嵌品自身等级”的持久化与判定
+- 涉及 `itemlevelcondition` / `LevelDescription` 时，镶嵌运行时按容器实例等级计算
+
 ## 4. 运行时生效逻辑（大致实现）
 
 当系统识别到“该实例存在等级或镶嵌变化”时，会构建运行时组合物品。
