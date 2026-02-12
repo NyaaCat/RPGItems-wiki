@@ -240,6 +240,30 @@
 - `marker`：按顺序依次处理
 - `power`：按触发器顺序依次执行
 
+### 推荐：纯命令创建镶嵌品（热更新）
+
+以下示例把 `ruby_gem` 设置为镶嵌品，把 `great_sword` 设置为容器：
+
+```bash
+/rpgitem socket ruby_gem socketitem true
+/rpgitem socket ruby_gem tags set GEM
+/rpgitem socket ruby_gem weight 3
+/rpgitem socket ruby_gem minlevel 2
+/rpgitem socket ruby_gem lore clear
+/rpgitem socket ruby_gem lore add &7[Gem] +10 Damage
+
+/rpgitem socket great_sword container true
+/rpgitem socket great_sword accepttags set GEM
+/rpgitem socket great_sword maxweight 10
+/rpgitem socket great_sword insertline 1
+```
+
+说明：
+
+- 全部命令即时生效，不需要手动改 yml
+- 可用 `/rpgitem socket <item> info` 查看当前配置
+- 设置完后用 `/rpgitem socket` 打开 GUI 进行实例镶嵌
+
 ### 容器配置
 
 ```yaml

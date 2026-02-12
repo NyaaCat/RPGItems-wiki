@@ -155,6 +155,27 @@ Requires permission: `rpgitem.tomodel`
 - Opens a 3-row chest GUI for editing sockets on an item instance
 - Taking back the center item closes the GUI immediately
 
+### Hot-update Socket Config via Commands
+
+```
+/rpgitem socket <item> info
+/rpgitem socket <item> socketitem <true|false>
+/rpgitem socket <item> container <true|false>
+/rpgitem socket <item> accepttags <list|set|add|remove|clear> [tags]
+/rpgitem socket <item> tags <list|set|add|remove|clear> [tags]
+/rpgitem socket <item> maxweight <value>
+/rpgitem socket <item> insertline <line>
+/rpgitem socket <item> weight <value>
+/rpgitem socket <item> minlevel <value>
+/rpgitem socket <item> lore <list|add|insert|set|remove|clear> [params]
+```
+
+- `socketitem true`: mark this item as a socket item (defaults to tag `ANY` when empty)
+- `container true`: mark this item as a container (defaults to `ANY` accept tag when empty)
+- `accepttags`: tags accepted by container items
+- `tags`: tags provided by socket items
+- tag arguments support comma-separated values, e.g. `GEM,RUNE`
+
 ### Get/Set Instance Level
 
 ```

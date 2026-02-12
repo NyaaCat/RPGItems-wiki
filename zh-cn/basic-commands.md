@@ -159,6 +159,27 @@
 - 打开后使用 3 行箱子界面编辑主道具的镶嵌
 - 取回中间槽位道具时会立即关闭 GUI
 
+### 通过命令热更新镶嵌配置
+
+```
+/rpgitem socket <item> info
+/rpgitem socket <item> socketitem <true|false>
+/rpgitem socket <item> container <true|false>
+/rpgitem socket <item> accepttags <list|set|add|remove|clear> [tags]
+/rpgitem socket <item> tags <list|set|add|remove|clear> [tags]
+/rpgitem socket <item> maxweight <value>
+/rpgitem socket <item> insertline <line>
+/rpgitem socket <item> weight <value>
+/rpgitem socket <item> minlevel <value>
+/rpgitem socket <item> lore <list|add|insert|set|remove|clear> [params]
+```
+
+- `socketitem true`：将道具设为镶嵌品（若无标签会默认给 `ANY`）
+- `container true`：将道具设为容器（若无接收标签会默认给 `ANY`）
+- `accepttags`：容器可接收标签
+- `tags`：镶嵌品标签
+- `tags` 参数支持逗号分隔，如 `GEM,RUNE`
+
 ### 查询/设置道具实例等级
 
 ```

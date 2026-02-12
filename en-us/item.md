@@ -261,6 +261,30 @@ Runtime order is: `container -> socket1 -> socket2 -> ...`.
 - `marker`: processed sequentially
 - `power`: triggered sequentially by trigger order
 
+### Recommended: Create Socket Items by Commands (Hot Update)
+
+Example: set `ruby_gem` as a socket item, and `great_sword` as a container:
+
+```bash
+/rpgitem socket ruby_gem socketitem true
+/rpgitem socket ruby_gem tags set GEM
+/rpgitem socket ruby_gem weight 3
+/rpgitem socket ruby_gem minlevel 2
+/rpgitem socket ruby_gem lore clear
+/rpgitem socket ruby_gem lore add &7[Gem] +10 Damage
+
+/rpgitem socket great_sword container true
+/rpgitem socket great_sword accepttags set GEM
+/rpgitem socket great_sword maxweight 10
+/rpgitem socket great_sword insertline 1
+```
+
+Notes:
+
+- All commands are hot-updated immediately; no manual yml editing required
+- Use `/rpgitem socket <item> info` to inspect current socket config
+- Then use `/rpgitem socket` to open GUI and edit instance sockets
+
 ### Container fields
 
 ```yaml
