@@ -3,6 +3,8 @@
 - [配置文件](configuration.md)
 - [基础命令](basic-commands.md)
 - [制作道具](items-customization.md)
+- [镶嵌系统](socketing.md)
+- [物品等级系统](item-level.md)
 - [入门教程](beginning.md)
 - [标记列表](markers.md)
 - [触发列表](triggers.md)

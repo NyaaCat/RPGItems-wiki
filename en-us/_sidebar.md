@@ -2,6 +2,8 @@
 - [Installation](installation.md)
 - [Basic Commands](basic.md)
 - [Item Customization](item.md)
+- [Socketing](socketing.md)
+- [Item Level](item-level.md)
 - [Markers](marker.md)
 - [Triggers](trigger.md)
 - [Conditions](condition.md)
